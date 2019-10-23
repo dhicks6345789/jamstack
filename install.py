@@ -140,23 +140,21 @@ getUserOption("-domainName", "Please enter this site's domain name")
 print("Set up Let's Encrypt certificate?")
 print("This server needs to have a valid DNS entry pointing at it first - select \"no\" and you'll get a non-SSL server for testing, re-run this script with the \"-redoApacheConfig\" option to change.")
 userSelection = askUserMenu(["Yes - single domain name.","Yes - wildcard domain.","No"])
+# Stop Apache while we update the config.
+os.system("apachectl stop")
+# Pause for a moment to make sure apache has actually stopped.
+time.sleep(4)
 if userSelection == 1:
     print("Code goes here...")
     #os.system("certbot")
 elif userSelection == 2:
     print("Code goes here...")
 elif userSelection == 3:
+    # Copy over the Apache configuration file.
     copyfile("000-default-without-SSL.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
 replaceVariables("/etc/apache2/sites-available/000-default.conf", {"DOMAINNAME":userOptions["-domainName"]})
-
-# Stop Apache while we update the config.
-os.system("apachectl stop")
-# Pause for a moment to make sure apache has actually stopped.
-time.sleep(4)
-# Copy over the Apache configuration file.
-#copyfile("000-default.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
 # Copy over the WSGI configuration file.
-#copyfile("api.wsgi", "/var/www/api.wsgi", mode=0744)
+copyfile("api.wsgi", "/var/www/api.wsgi", mode=0744)
 # Start Apache back up again.
 os.system("apachectl start")
 
