@@ -45,6 +45,12 @@ def askUserMenu(theOptions):
     userSelection = input("Selection: ")
     return(userSelection)
 
+def replaceVariables(theFile, theKeyValues):
+    fileData = readFile(theFile)
+    for keyValue in theKeyValues.keys():
+        fileData = fileData.replace("<<" + keyValue + ">>", theKeyValues[keyValue])
+    writeFile(theFile, fileData)
+
 print("Installing...")
 
 # Make sure dos2unix (line-end conversion utility) is installed.
