@@ -98,7 +98,7 @@ runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi", "apt-get install -y libap
 # ...and Certbot, for Let's Encrypt SSL certificates.
 runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
-getUserOption("-domainName", "Please enter this site's domain name: ")
+getUserOption("-domainName", "Please enter this site's domain name")
 
 # If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
 # Code goes here - check if there's an archived SSL cedtiftcate to unpack.
