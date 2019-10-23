@@ -112,6 +112,7 @@ os.system("a2enmod ssl > /dev/null")
 os.system("a2enmod rewrite > /dev/null")
 # ...along with mod_wsgi...
 runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi", "apt-get install -y libapache2-mod-wsgi")
+os.system("a2enmod wsgi > /dev/null")
 # ...and Certbot, for Let's Encrypt SSL certificates.
 runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
