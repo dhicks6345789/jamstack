@@ -171,7 +171,7 @@ if not os.path.exists("/home/pi/.config/rclone/rclone.conf"):
         "expect \"Storage>\"",
         "send \"drive\\r\"",
         "expect \"client_id>\"",
-        "interact"
+        "interact",
         #"send \"556680234914-khamoi3j7tf3d723pe3n9u5ipvnlbsq5.apps.googleusercontent.com\\r\"",
         "expect \"client_secret>\"",
         #"send \"FZ-AFSv5AORIroYBf93fvS7v\\r\"",
