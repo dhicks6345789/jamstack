@@ -1,7 +1,21 @@
 #!/usr/bin/python3
 
 import os
+import sys
 import shutil
+
+validBooleanOptions = []
+validValueOptions = ["-domainName"]
+
+userOptions = {}
+optionCount = 1
+while optionCount < len(sys.argv):
+    if sys.argv[optionCount] in validBooleanOptions:
+        userOptions[sys.argv[optionCount]] = True
+    elif sys.argv[optionCount] in validValueOptions:
+        userOptions[sys.argv[optionCount]] = userOptions[sys.argv[optionCount+1]]
+        optionCount = optionCount + 1
+    optionCount = optionCount + 1
 
 def runIfPathMissing(thePath, theCommand):
     if not os.path.exists(thePath):
@@ -19,6 +33,18 @@ def copyfile(src, dest, mode=None):
             #os.chmod(dest, int(mode))
         return(1)
     return(0)
+
+def getUserOption(optionName, theMessage):
+    if not optionName in userOptions.keys():
+        userOptions[optionName] = input(theMessage + ": ")
+    return(userOptions[optionName])
+
+def askUserMenu(theOptions):
+    optionCount = 1
+    for option in theOptions:
+        print(optionCount + ": " + option)
+    userSelection = input("Selection: ")
+    return(userSelection)
 
 print("Installing...")
 
