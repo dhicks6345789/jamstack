@@ -118,7 +118,7 @@ elif userSelection == 2:
     print("Code goes here...")
 elif userSelection == 3:
     copyfile("000-default-without-ssl.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
-replaceVariables("/etc/apache2/sites-available/000-default.conf", {"DOMAINNAME":userOptions["-domianName"]})
+replaceVariables("/etc/apache2/sites-available/000-default.conf", {"DOMAINNAME":userOptions["-domainName"]})
 
 # Stop Apache while we update the config.
 os.system("apachectl stop")
