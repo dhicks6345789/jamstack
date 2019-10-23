@@ -84,6 +84,9 @@ pythonVersion = os.popen("ls /usr/local/lib | grep python3").read().strip()
 # Make sure Git (source code control client) is installed.
 runIfPathMissing("/usr/bin/git", "apt-get install -y git")
 
+# Make sure curl (utility to get files from the web) is installed.
+runIfPathMissing("/usr/bin/curl", "apt-get install -y curl")
+
 # Make sure build-essential (Debian build environment, should include most tools you need to build other packages) is installed.
 runIfPathMissing("/usr/share/doc/build-essential", "apt-get install -y build-essential")
 
@@ -116,7 +119,7 @@ runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/numpy", "pip3 i
 runIfPathMissing("/usr/bin/expect", "apt-get -y install expect")
 
 # Make sure rclone (for mounting cloud-based filesystems such as Google Drive) is installed.
-runIfPathMissing("/usr/bin/rclone", "wget https://rclone.org/install.sh -q -O - | bash")
+runIfPathMissing("/usr/bin/rclone", "curl https://rclone.org/install.sh | sudo bash")
 
 # Make sure Apache (web server) is installed...
 runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
