@@ -56,8 +56,6 @@ runIfPathMissing("/usr/bin/pip3", "apt-get install -y python3-pip")
 
 # Figure out what version of Python3 we have installed.
 pythonVersion = os.popen("ls /usr/local/lib | grep python3").read().strip()
-print("!!!")
-print(pythonVersion)
 
 # Make sure Git (source code control client) is installed.
 runIfPathMissing("/usr/bin/git", "apt-get install -y git")
@@ -82,13 +80,13 @@ os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
 runIfPathMissing("/usr/bin/pandoc", "wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-1-amd64.deb; dpkg -i pandoc-2.7.1-1-amd64.deb; rm pandoc-2.7.1-1-amd64.deb")
 
 # Make sure XLRD (Python library for handling Excel files, required for Excel support in Pandas) is installed.
-runIfPathMissing("/usr/local/lib/python3.5/dist-packages/xlrd", "pip3 install xlrd")
+runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/xlrd", "pip3 install xlrd")
 
 # Make sure Pandas (Python data-analysis library) is installed.
-runIfPathMissing("/usr/local/lib/python3.5/dist-packages/pandas", "pip3 install pandas")
+runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/pandas", "pip3 install pandas")
 
 # Make sure Numpy (Python maths library) is installed.
-runIfPathMissing("/usr/local/lib/python3.5/dist-packages/numpy", "pip3 install numpy")
+runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/numpy", "pip3 install numpy")
 
 # Make sure Apache (web server) is installed...
 runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
