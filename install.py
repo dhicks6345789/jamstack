@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import os
-import time
 import shutil
 
 def runIfPathMissing(thePath, theCommand):
@@ -26,7 +25,7 @@ print("Installing...")
 # Make sure dos2unix (line-end conversion utility) is installed.
 runIfPathMissing("/usr/bin/dos2unix", "apt-get install -y dos2unix")
 
-# Make sure Pip (Python package manager) is installed.
+# Make sure Pip3 (Python 3 package manager) is installed.
 runIfPathMissing("/usr/bin/pip3", "apt-get install -y python3-pip")
 
 # Make sure Git (source code control client) is installed.
@@ -59,3 +58,28 @@ runIfPathMissing("/usr/local/lib/python3.5/dist-packages/pandas", "pip3 install 
 
 # Make sure Numpy (Python maths library) is installed.
 runIfPathMissing("/usr/local/lib/python3.5/dist-packages/numpy", "pip3 install numpy")
+
+# Make sure Apache (web server) is installed...
+runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
+# ...with SSL enabled...
+os.system("a2enmod ssl > /dev/null")
+# ...and mod_rewrite...
+os.system("a2enmod rewrite > /dev/null")
+# ...along with mod_wsgi...
+runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi", "apt-get install -y libapache2-mod-wsgi")
+# ...and Certbot, for Let's Encrypt SSL certificates.
+runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
+
+# If this project already includes a Let's Encrypt certificate, install that. Otherwise, set one up.
+os.system("certbot")
+
+# Stop Apache while we update the config.
+os.system("apachectl stop")
+# Pause for a moment to make sure apache has actually stopped.
+time.sleep(4)
+# Copy over the Apache configuration file.
+#copyfile("000-default.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
+# Copy over the WSGI configuration file.
+#copyfile("api.wsgi", "/var/www/api.wsgi", mode=0744)
+# Start Apache back up again.
+os.system("apachectl start")
