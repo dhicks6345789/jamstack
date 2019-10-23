@@ -43,7 +43,7 @@ def askUserMenu(theOptions):
     for optionCount in range(0, len(theOptions)):
         print(str(optionCount+1) + ": " + theOptions[optionCount])
     userSelection = input("Selection: ")
-    return(userSelection)
+    return(int(userSelection))
 
 def readFile(theFilename):
     fileDataHandle = open(theFilename, "r")
