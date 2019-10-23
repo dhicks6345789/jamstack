@@ -30,7 +30,6 @@ def copyfile(src, dest, mode=None):
         os.utime(dest, (srcStat.st_atime, srcStat.st_mtime))
         if not mode == None:
             os.system("chmod " + mode + " " + dest)
-            #os.chmod(dest, int(mode))
         return(1)
     return(0)
 
@@ -42,7 +41,7 @@ def getUserOption(optionName, theMessage):
 def askUserMenu(theOptions):
     optionCount = 1
     for option in theOptions:
-        print(optionCount + ": " + option)
+        print(str(optionCount) + ": " + option)
     userSelection = input("Selection: ")
     return(userSelection)
 
