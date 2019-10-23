@@ -53,14 +53,89 @@ def readFile(theFilename):
     
 def writeFile(theFilename, theFileData):
     fileDataHandle = open(theFilename, "w")
-    fileDataHandle.write(theFileData)
+    if isinstance(theFileData, list):
+        fileDataHandle.write("\n".join(theFileData))
+    else:
+        fileDataHandle.write(theFileData)
     fileDataHandle.close()
-
+    
 def replaceVariables(theFile, theKeyValues):
     fileData = readFile(theFile)
     for keyValue in theKeyValues.keys():
         fileData = fileData.replace("<<" + keyValue + ">>", theKeyValues[keyValue])
     writeFile(theFile, fileData)
+    
+def runExpect(inputArray):
+  writeFile("temp.expect", inputArray)
+  os.system("expect temp.expect")
+  os.system("rm temp.expect")
+    
+def configRclone():
+  if not os.path.exists("/usr/bin/expect"):
+    print("Installing Expect...")
+    os.system("apt-get -y install expect")
+  if not os.path.exists("/usr/bin/rclone"):
+    print("Installing rclone...")
+    os.system("curl https://rclone.org/install.sh | bash")
+  if not os.path.exists("~/.config/rclone/rclone.conf"):
+    print("Configuring rclone...")
+    runExpect([
+      "spawn /usr/bin/rclone config",
+      "expect \"n/s/q>\"",
+      "send \"n\\r\"",
+      "expect \"name>\"",
+      "send \"drive\\r\"",
+      "expect \"Storage>\"",
+      "send \"drive\\r\"",
+      "expect \"client_id>\"",
+      "interact"
+      #"send \"556680234914-khamoi3j7tf3d723pe3n9u5ipvnlbsq5.apps.googleusercontent.com\\r\"",
+      "expect \"client_secret>\"",
+      #"send \"FZ-AFSv5AORIroYBf93fvS7v\\r\"",
+      "interact",
+      "expect \"scope>\"",
+      "send \"drive\\r\"",
+      "expect \"root_folder_id>\"",
+      #"send \"\\r\"",
+      "interact",
+      "expect \"service_account_file>\"",
+      "send \"\\r\"",
+      "expect \"y/n>\"",
+      "send \"n\\r\"",
+      "expect \"y/n>\"",
+      "send \"y\\r\"",
+      "expect \"y/n>\"",
+      "send \"n\\r\"",
+      "expect \"y/e/d>\"",
+      "send \"y\\r\"",
+      
+      "expect \"e/n/d/r/c/s/q>\"",
+      "send \"n\\r\"",
+      "expect \"name>\"",
+      "send \"Documents\\r\"",
+      "expect \"Storage>\"",
+      "send \"cache\\r\"",
+      "expect \"remote>\"",
+      "send \"drive:\\r\"",
+      "expect \"plex_url>\"",
+      "send \"\\r\"",
+      "expect \"plex_username>\"",
+      "send \"\\r\"",
+      "expect \"y/g/n>\"",
+      "send \"n\\r\"",
+      "expect \"chunk_size>\"",
+      "send \"10M\\r\"",
+      "expect \"info_age>\"",
+      "send \"1y\\r\"",
+      "expect \"chunk_total_size>\"",
+      "send \"1G\\r\"",
+      "expect \"y/n>\"",
+      "send \"n\\r\"",
+      "expect \"y/e/d>\"",
+      "send \"y\\r\"",
+      "expect \"e/n/d/r/c/s/q>\"",
+      "send \"q\\r\""
+    ])
 
 print("Installing...")
 
