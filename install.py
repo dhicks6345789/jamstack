@@ -160,7 +160,7 @@ time.sleep(4)
 # Start Apache back up again.
 os.system("apachectl start")
 
-if not os.path.exists("~/.config/rclone/rclone.conf"):
+if not os.path.exists("/root/.config/rclone/rclone.conf"):
     print("Configuring rclone...")
     runExpect([
         "spawn /usr/bin/rclone config",
