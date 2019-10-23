@@ -1,15 +1,7 @@
 # Standard Python libraries.
 import os
-import re
-import sys
-import uuid
-import time
-import json
-import pickle
 import sqlite3
 import logging
-import datetime
-import collections
 
 # Import the Flask web application framework.
 import flask
@@ -62,6 +54,10 @@ def setup():
 @app.route("/")
 def root():
     return flask.redirect("/api.html", code=302)
+
+@app.route("/")
+def root():
+    return("Hello, ")
 
 # A function called when the application ends (i.e. in our case, when Apache is stopped / restarted).
 # Makes sure the database connection is properly closed.
