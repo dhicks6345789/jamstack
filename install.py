@@ -39,8 +39,8 @@ def getUserOption(optionName, theMessage):
     return(userOptions[optionName])
 
 def askUserMenu(theOptions):
-    for optionCount in range(1, len(theOptions)):
-        print(str(optionCount) + ": " + theOptions[optionCount])
+    for optionCount in range(0, len(theOptions)):
+        print(str(optionCount+1) + ": " + theOptions[optionCount])
     userSelection = input("Selection: ")
     return(userSelection)
 
