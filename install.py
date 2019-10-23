@@ -98,10 +98,12 @@ runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi", "apt-get install -y libap
 # ...and Certbot, for Let's Encrypt SSL certificates.
 runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
+getUserOption("-domainName", "Please enter this site's domain name: ")
+
 # If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
 # Code goes here - check if there's an archived SSL cedtiftcate to unpack.
 print("Set up Let's Encrypt certificate?")
-print("This server needs to have a valid domain name pointing at it first - select \"no\" and you'll get a non-SSL server for testing, re-run this script with the \"-redoApacheConfig\" option to change.")
+print("This server needs to have a valid DNS entry pointing at it first - select \"no\" and you'll get a non-SSL server for testing, re-run this script with the \"-redoApacheConfig\" option to change.")
 userSelection = askUserMenu(["Yes - single domain name.","Yes - wildcard domain.","No"])
 if userSelection == 1:
     print("Code goes here...")
@@ -110,6 +112,7 @@ elif userSelection == 2:
     print("Code goes here...")
 elif userSelection == 3:
     copyfile("000-default-without-ssl.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
+replaceVariables("/etc/apache2/sites-available/000-default.conf", {"DOMAINNAME":userOptions["-domianName"]})
 
 # Stop Apache while we update the config.
 os.system("apachectl stop")
