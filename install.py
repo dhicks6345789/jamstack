@@ -4,9 +4,9 @@ import os
 import sys
 import shutil
 
+# Parse any options set by the user on the command line.
 validBooleanOptions = []
 validValueOptions = ["-domainName"]
-
 userOptions = {}
 optionCount = 1
 while optionCount < len(sys.argv):
@@ -96,8 +96,18 @@ runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi", "apt-get install -y libap
 # ...and Certbot, for Let's Encrypt SSL certificates.
 runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
-# If this project already includes a Let's Encrypt certificate, install that. Otherwise, set one up.
-os.system("certbot")
+# If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
+# Code goes here - check if there's an archived SSL cedtiftcate to unpack.
+print("Set up Let's Encrypt certificate?")
+print("This server needs to have a valid domain name pointing at it first - select \"no\" and you'll get a non-SSL server for testing, re-run this script with the \"-redoApacheConfig\" option to change.")
+userSelection = askUserMenu(["Yes - single domain name.","Yes - wildcard domain.","No"])
+if userSelection == 1:
+    print("Code goes here...")
+    #os.system("certbot")
+elif userSelection == 2:
+    print("Code goes here...")
+elif userSelection == 3:
+    copyfile("000-default-without-ssl.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
 
 # Stop Apache while we update the config.
 os.system("apachectl stop")
