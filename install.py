@@ -177,7 +177,7 @@ if not os.path.exists("/home/pi/.config/rclone/rclone.conf"):
         #"send \"FZ-AFSv5AORIroYBf93fvS7v\\r\"",
         "interact",
         "expect \"scope>\"",
-        "send \"drive\\r\"",
+        "send \"drive.readonly"\\r\"",
         "expect \"root_folder_id>\"",
         #"send \"\\r\"",
         "interact",
