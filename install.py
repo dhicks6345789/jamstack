@@ -46,13 +46,13 @@ def askUserMenu(theOptions):
     return(userSelection)
 
 def readFile(theFilename):
-    fileDataHandle = open(theFilename, "rb")
+    fileDataHandle = open(theFilename, "r")
     fileData = fileDataHandle.read()
     fileDataHandle.close()
     return(fileData)
     
 def writeFile(theFilename, theFileData):
-    fileDataHandle = open(theFilename, "wb")
+    fileDataHandle = open(theFilename, "w")
     fileDataHandle.write(theFileData)
     fileDataHandle.close()
 
