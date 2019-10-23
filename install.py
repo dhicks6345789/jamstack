@@ -116,7 +116,7 @@ runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/numpy", "pip3 i
 runIfPathMissing("/usr/bin/expect", "apt-get -y install expect")
 
 # Make sure rclone (for mounting cloud-based filesystems such as Google Drive) is installed.
-runIfPathMissing("/usr/bin/rclone", "wget https://rclone.org/install.sh -O - | bash > /de/null 2>&1")
+runIfPathMissing("/usr/bin/rclone", "wget https://rclone.org/install.sh -O - | bash > /dev/null 2>&1")
 
 # Make sure Apache (web server) is installed...
 runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
