@@ -56,8 +56,8 @@ runIfPathMissing("/usr/bin/pip3", "apt-get install -y python3-pip")
 
 # Figure out what version of Python3 we have installed.
 pythonVersion = os.popen("ls /usr/local/lib | grep python3").read().strip()
-print "!!!"
-print pythonVersion
+print("!!!")
+print(pythonVersion)
 
 # Make sure Git (source code control client) is installed.
 runIfPathMissing("/usr/bin/git", "apt-get install -y git")
