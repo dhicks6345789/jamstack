@@ -45,6 +45,17 @@ def askUserMenu(theOptions):
     userSelection = input("Selection: ")
     return(userSelection)
 
+def readFile(theFilename):
+    fileDataHandle = open(theFilename, "rb")
+    fileData = fileDataHandle.read()
+    fileDataHandle.close()
+    return(fileData)
+    
+def writeFile(theFilename, theFileData):
+    fileDataHandle = open(theFilename, "wb")
+    fileDataHandle.write(theFileData)
+    fileDataHandle.close()
+
 def replaceVariables(theFile, theKeyValues):
     fileData = readFile(theFile)
     for keyValue in theKeyValues.keys():
