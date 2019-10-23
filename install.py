@@ -2,6 +2,7 @@
 
 import os
 import sys
+import time
 import shutil
 
 # Parse any options set by the user on the command line.
