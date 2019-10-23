@@ -14,7 +14,7 @@ while optionCount < len(sys.argv):
     if sys.argv[optionCount] in validBooleanOptions:
         userOptions[sys.argv[optionCount]] = True
     elif sys.argv[optionCount] in validValueOptions:
-        userOptions[sys.argv[optionCount]] = userOptions[sys.argv[optionCount+1]]
+        userOptions[sys.argv[optionCount]] = sys.argv[optionCount+1]
         optionCount = optionCount + 1
     optionCount = optionCount + 1
 
