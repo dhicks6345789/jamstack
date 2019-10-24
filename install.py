@@ -280,4 +280,4 @@ os.system("systemctl enable rclone-jekyll")
 copyfile("build.sh", "/usr/local/bin/build.sh", mode="755")
 
 # Install DocsToMarkdown.
-runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubusercontent.com/dhicks6345789/docs-to-markdown/master/docsToMarkdown.py -o /usr/local/bin/docsToMarkdown.py; chmod a+x /usr/local/bin/docsToMarkdown.py")
+runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubusercontent.com/dhicks6345789/docs-to-markdown/master/docsToMarkdown.py -o /usr/local/bin/docsToMarkdown.py; chmod a+x /usr/local/bin/docsToMarkdown.py; echo > /var/log/docsToMarkdown.log; chmod a+w /var/log/docsToMarkdown.log")
