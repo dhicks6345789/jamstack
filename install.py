@@ -107,7 +107,7 @@ os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
 runIfPathMissing("/usr/bin/pandoc", "wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-1-amd64.deb; dpkg -i pandoc-2.7.1-1-amd64.deb; rm pandoc-2.7.1-1-amd64.deb")
 
 # Make sure Flask (Python web-publishing framework) is installed.
-runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/flask", "pip install flask")
+runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/flask", "pip3 install flask")
 
 # Make sure XLRD (Python library for handling Excel files, required for Excel support in Pandas) is installed.
 runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/xlrd", "pip3 install xlrd")
