@@ -1,0 +1,128 @@
+[
+    {"global":"baseURL", "value":"http://accessdisputesrail.org/"},
+    {"global":"validFrontMatterFields", "value":["rule", "determination", "date", "accessInformation", "clause1", "clause2", "clause3", "clause4", "clause5", "clause6", "clause7", "clause8", "clause9", "clause10", "clause11", "clause12", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6"]},
+    {"function":"filesToMarkdown", "inputFiles":["index.docx"], "outputFile":"index.md", "frontMatter":{"layout":"frontPage", "title":"Access Disputes Committee", "breadcrumbs":"false"}},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/index.docx"], "outputFile":"accessDisputesCommitteeIndex/index.md", "frontMatter":{"layout":"default", "title":"Access Disputes Committee Index", "breadcrumbs":"true"}},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/TTPDeterminations/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/TTPDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/TTPDeterminations/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/TTPDeterminations/index.md", "frontMatter":{"layout":"TTPDeterminations", "title":"List Of Determinations", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/TTPDeterminations/Determinations", "dest":"accessDisputesCommitteeIndex/TTPDeterminations/Determinations"},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/TTPDeterminations/SubmissionsFromTheParties", "dest":"accessDisputesCommitteeIndex/TTPDeterminations/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/index.md", "frontMatter":{"layout":"AccessDisputesPanelsDeterminations", "title":"References For Hearing By An Access Dispute Panel (from April 2005)", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/Determinations", "dest":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/Determinations"},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/SubmissionsFromTheParties", "dest":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputesPanels/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/index.md", "frontMatter":{"layout":"AccessDisputeAdjudicationsDeterminations", "title":"References for hearing by an Access Dispute Adjudication (from August 2010)", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/Determinations", "dest":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/Determinations"},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/SubmissionsFromTheParties", "dest":"accessDisputesCommitteeIndex/DeterminationsOfAccessDisputeAdjudications/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/ADCArbitrations/arbitrations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/ADCArbitrations/arbitrations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADCArbitrations/arbitrations.docx"], "outputFile":"accessDisputesCommitteeIndex/ADCArbitrations/index.md", "frontMatter":{"layout":"ADCArbitrations", "title":"List of Arbitrations (from April 2005)", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADCArbitrations/Awards", "dest":"accessDisputesCommitteeIndex/ADCArbitrations/Awards"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/ADCExpertDeterminations/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/ADCExpertDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADCExpertDeterminations/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/ADCExpertDeterminations/index.md", "frontMatter":{"layout":"ADCExpertDeterminations", "title":"List of Expert Determinations", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/GuidanceIssuedToChairs", "dest":"accessDisputesCommitteeIndex/GuidanceIssuedToChairs"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADCMinutes/minutes.docx"], "outputFile":"accessDisputesCommitteeIndex/ADCMinutes/index.md", "frontMatter":{"layout":"ADCMinutes", "title":"Index of Access Dispute Committee Meetings", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADCMinutes/Minutes", "dest":"accessDisputesCommitteeIndex/ADCMinutes/Minutes"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADCReports/reports.docx"], "outputFile":"accessDisputesCommitteeIndex/ADCReports/index.md", "frontMatter":{"layout":"ADCReports", "title":"Index of Access Disputes Committee Reports", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADCReports/Reports", "dest":"accessDisputesCommitteeIndex/ADCReports/Reports"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/ADRCDeterminations/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/ADRCDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADRCDeterminations/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/ADRCDeterminations/index.md", "frontMatter":{"layout":"ADRCDeterminations", "title":"List of references to the Access Dispute Resolution Committee from 1995 until 14.04.05", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADRCDeterminations/Determinations", "dest":"accessDisputesCommitteeIndex/ADRCDeterminations/Determinations"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/NVCCDeterminations/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/NVCCDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/NVCCDeterminations/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/NVCCDeterminations/index.md", "frontMatter":{"layout":"NVCCDeterminations", "title":"List of references to the Network and Vehicle Change Committee (NVCC) from 1995 until 14.04.05", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/NVCCDeterminations/Determinations", "dest":"accessDisputesCommitteeIndex/NVCCDeterminations/Determinations"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/TTCDeterminations/determinations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/TTCDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/TTCDeterminations/determinations.docx"], "outputFile":"accessDisputesCommitteeIndex/TTCDeterminations/index.md", "frontMatter":{"layout":"TTCDeterminations", "title":"List of references to the Timetabling Committee from 1994 until 14.04.05", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/TTCDeterminations/Determinations", "dest":"accessDisputesCommitteeIndex/TTCDeterminations/Determinations"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADRCMinutes/minutes.docx"], "outputFile":"accessDisputesCommitteeIndex/ADRCMinutes/index.md", "frontMatter":{"layout":"ADRCMinutes", "title":"Index of Access Dispute Resolution Committee Meetings", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADRCMinutes/Minutes", "dest":"accessDisputesCommitteeIndex/ADRCMinutes/Minutes"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/NVCCMinutes/minutes.docx"], "outputFile":"accessDisputesCommitteeIndex/NVCCMinutes/index.md", "frontMatter":{"layout":"NVCCMinutes", "title":"Index of Network and Vehicle Change Committee Meetings", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/NVCCMinutes/Minutes", "dest":"accessDisputesCommitteeIndex/NVCCMinutes/Minutes"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/TTCMinutes/minutes.docx"], "outputFile":"accessDisputesCommitteeIndex/TTCMinutes/index.md", "frontMatter":{"layout":"TTCMinutes", "title":"Index of Timetabling Committee Meetings", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/TTCMinutes/Minutes", "dest":"accessDisputesCommitteeIndex/TTCMinutes/Minutes"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/ADRCArbitrations/arbitrations.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/ADRCArbitrations/arbitrations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/ADRCArbitrations/arbitrations.docx"], "outputFile":"accessDisputesCommitteeIndex/ADRCArbitrations/index.md", "frontMatter":{"layout":"ADRCArbitrations", "title":"List of Arbitrations (prior to April 2005)", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/ADRCArbitrations/Awards", "dest":"accessDisputesCommitteeIndex/ADRCArbitrations/Awards"},
+    
+    {"function":"filesToCSV", "inputFiles":["accessDisputesCommitteeIndex/Templates/templates.xlsx"], "outputFile":"_data/accessDisputesCommitteeIndex/Templates/templates.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeIndex/Templates/templates.docx"], "outputFile":"accessDisputesCommitteeIndex/Templates/index.md", "frontMatter":{"layout":"Templates", "title":"Templates", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Index", "crumbOneURL":"/accessDisputesCommitteeIndex"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeIndex/Templates/Documents", "dest":"accessDisputesCommitteeIndex/Templates/Documents"},
+    
+    {"function":"filesToCSV", "inputFiles":["HS1/Templates/templates.xlsx"], "outputFile":"_data/HS1/Templates/templates.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["HS1/Templates/templates.docx"], "outputFile":"HS1/Templates/index.md", "frontMatter":{"layout":"Templates", "title":"Templates", "breadcrumbs":"true", "crumbOne":"HS1", "crumbOneURL":"/HS1"}},
+    {"function":"copyFolder", "src":"HS1/Templates/Documents", "dest":"HS1/Templates/Documents"},
+    
+    {"function":"filesToCSV", "inputFiles":["HS1/TTPDeterminations/determinations.xlsx"], "outputFile":"_data/HS1/TTPDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["HS1/TTPDeterminations/determinations.docx"], "outputFile":"HS1/TTPDeterminations/index.md", "frontMatter":{"layout":"HS1TTPDeterminations", "title":"List Of Determinations", "breadcrumbs":"true", "crumbOne":"HS1", "crumbOneURL":"/HS1"}},
+    {"function":"copyFolder", "src":"HS1/TTPDeterminations/Determinations", "dest":"HS1/TTPDeterminations/Determinations"},
+    {"function":"copyFolder", "src":"HS1/TTPDeterminations/SubmissionsFromTheParties", "dest":"HS1/TTPDeterminations/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["HS1/ADADeterminations/determinations.xlsx"], "outputFile":"_data/HS1/ADADeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["HS1/ADADeterminations/determinations.docx"], "outputFile":"HS1/ADADeterminations/index.md", "frontMatter":{"layout":"HS1ADADeterminations", "title":"List Of Determinations", "breadcrumbs":"true", "crumbOne":"HS1", "crumbOneURL":"/HS1"}},
+    {"function":"copyFolder", "src":"HS1/ADADeterminations/Determinations", "dest":"HS1/ADADeterminations/Determinations"},
+    {"function":"copyFolder", "src":"HS1/ADADeterminations/SubmissionsFromTheParties", "dest":"HS1/ADADeterminations/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["HAL/TTPDeterminations/determinations.xlsx"], "outputFile":"_data/HAL/TTPDeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["HAL/TTPDeterminations/determinations.docx"], "outputFile":"HAL/TTPDeterminations/index.md", "frontMatter":{"layout":"HALTTPDeterminations", "title":"List Of Determinations", "breadcrumbs":"true", "crumbOne":"HAL", "crumbOneURL":"/HAL"}},
+    {"function":"copyFolder", "src":"HS1/TTPDeterminations/Determinations", "dest":"HAL/TTPDeterminations/Determinations"},
+    {"function":"copyFolder", "src":"HS1/TTPDeterminations/SubmissionsFromTheParties", "dest":"HS1/TTPDeterminations/SubmissionsFromTheParties"},
+    
+    {"function":"filesToCSV", "inputFiles":["HAL/ADADeterminations/determinations.xlsx"], "outputFile":"_data/HAL/ADADeterminations/determinations.csv", "jekyllHeaders":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["HAL/ADADeterminations/determinations.docx"], "outputFile":"HAL/ADADeterminations/index.md", "frontMatter":{"layout":"HALADADeterminations", "title":"List Of Determinations", "breadcrumbs":"true", "crumbOne":"HAL", "crumbOneURL":"/HAL"}},
+    {"function":"copyFolder", "src":"HAL/ADADeterminations/Determinations", "dest":"HAL/ADADeterminations/Determinations"},
+    {"function":"copyFolder", "src":"HAL/ADADeterminations/SubmissionsFromTheParties", "dest":"HAL/ADADeterminations/SubmissionsFromTheParties"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/index.md", "frontMatter":{"layout":"default", "title":"Access Disputes Committee Directory Of Precedents", "breadcrumbs":"true"}},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement/index.md", "frontMatter":{"layout":"default", "title":"Charter Station Access Agreement", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section1.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section1.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section2.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section2.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section3.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section3.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section4.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessInformation-section4.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section1.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section1.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section2.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section2.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section3.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause3-section3.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause4-section1.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause4-section1.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause4-section2.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause4-section2.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause7-section1.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/clause7-section1.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/schedule3-section1.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/schedule3-section1.md", "produceLegislativeLists":"true"},
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/accessIndex.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/charterStationAccessAgreement2/index.md", "frontMatter":{"layout":"ADCDirectoryOfPrecedents", "title":"Charter Station Access Agreement", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/depotAccessConditions/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/depotAccessConditions/index.md", "frontMatter":{"layout":"default", "title":"Depot Access Conditions", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/depotAccessConditions", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/depotAccessConditions"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/freightTrackAccessContracts/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/freightTrackAccessContracts/index.md", "frontMatter":{"layout":"default", "title":"Freight Track Access Contracts", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/freightTrackAccessContracts", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/freightTrackAccessContracts"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/independentStationAccessConditions/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/independentStationAccessConditions/index.md", "frontMatter":{"layout":"default", "title":"Independent Station Access Conditions", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/independentStationAccessConditions", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/independentStationAccessConditions"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/nationalStationAccessConditions/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/nationalStationAccessConditions/index.md", "frontMatter":{"layout":"default", "title":"National Station Access Conditions", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/nationalStationAccessConditions", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/nationalStationAccessConditions"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/networkCode/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/networkCode/index.md", "frontMatter":{"layout":"default", "title":"Network Code", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/networkCode", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/networkCode"},
+    
+    {"function":"filesToMarkdown", "inputFiles":["accessDisputesCommitteeDirectoryOfPrecedents/passengerTrackAccessContracts/index.docx"], "outputFile":"accessDisputesCommitteeDirectoryOfPrecedents/passengerTrackAccessContracts/index.md", "frontMatter":{"layout":"default", "title":"Passenger Track Access Contracts", "breadcrumbs":"true", "crumbOne":"Access Disputes Committee Directory Of Precedents", "crumbOneURL":"/accessDisputesCommitteeDirectoryOfPrecedents"}},
+    {"function":"copyFolder", "src":"accessDisputesCommitteeDirectoryOfPrecedents/passengerTrackAccessContracts", "dest":"accessDisputesCommitteeDirectoryOfPrecedents/passengerTrackAccessContracts"},
+    
+    {"function":"copyFolder", "src":"RIDR", "dest":"RIDR"}
+]
