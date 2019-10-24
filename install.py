@@ -270,7 +270,7 @@ os.makedirs("/var/cache/rclone-content", exist_ok=True)
 os.makedirs("/var/cache/rclone-jekyll", exist_ok=True)
 # ...then set up systemd to mount the repository.
 copyfile("rclone-content.service", "/etc/systemd/system/rclone-content.service", mode="644")
-copyfile("rclone-jekyll.service", "/etc/systemd/system/rclone-content.jekyll", mode="644")
+copyfile("rclone-jekyll.service", "/etc/systemd/system/rclone-jekyll.service", mode="644")
 os.system("systemctl start rclone-content")
 os.system("systemctl start rclone-jekyll")
 os.system("systemctl enable rclone-content")
