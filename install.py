@@ -234,11 +234,14 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "send \"q\\r\""
     ])
 
-# Make sure Rclone is set up so it can be used to mount the user's cloud storage - first, make sure FUSE is configured
-# to allow non-root users to access mounts...
+# Set up rclone to mount the user's cloud storage - first, stop any existing rclone mount process...
+os.system("systemctl stop rclone")
+# ...make sure FUSE is configured to allow non-root users to access mounts...
 copyfile("fuse.conf", "/etc/fuse.conf", mode="644")
-# ...then, make sure the mount point and cache folders exist...
+# ...make sure the mount point and cache folders exist...
 os.makedirs("/mnt/rclone", exist_ok=True)
 os.makedirs("/var/cache/rclone", exist_ok=True)
 # ...then set up systemd to mount the repository.
 copyfile("rclone.service", "/etc/systemd/system/rclone.service", mode="644")
+os.system("systemctl start rclone")
+os.system("systemctl enable rclone")
