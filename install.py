@@ -7,7 +7,7 @@ import shutil
 
 # Parse any options set by the user on the command line.
 validBooleanOptions = []
-validValueOptions = ["-domainName", "-rootFolderID"]
+validValueOptions = ["-domainName", "-contentFolderPath", "-jekyllFolderPath"]
 userOptions = {}
 optionCount = 1
 while optionCount < len(sys.argv):
@@ -170,7 +170,8 @@ os.system("apachectl start")
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
     print("Configuring rclone...")
-    getUserOption("-rootFolderID", "Please enter the Google Drivefolder ID for the root folder")
+    getUserOption("-contentFolderPath", "Please enter the path that contains the content")
+    getUserOption("-jekyllFolderPath", "Please enter the path that contains the Jekyll setup")
     runExpect([
         "spawn /usr/bin/rclone config",
         "expect \"n/s/q>\"",
@@ -188,7 +189,7 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "expect \"scope>\"",
         "send \"drive.readonly\\r\"",
         "expect \"root_folder_id>\"",
-        "send \""+userOptions["-domainName"]+"\\r\"",
+        "send \"\\r\"",
         "expect \"service_account_file>\"",
         "send \"\\r\"",
         "expect \"y/n>\"",
@@ -206,11 +207,11 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "expect \"e/n/d/r/c/s/q>\"",
         "send \"n\\r\"",
         "expect \"name>\"",
-        "send \"Documents\\r\"",
+        "send \"content\\r\"",
         "expect \"Storage>\"",
         "send \"cache\\r\"",
         "expect \"remote>\"",
-        "send \"drive:\\r\"",
+        "send \"drive:"+userOptions["-contentFolderPath"]+"\\r\"",
         "expect \"plex_url>\"",
         "send \"\\r\"",
         "expect \"plex_username>\"",
@@ -227,7 +228,33 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "send \"n\\r\"",
         "expect \"y/e/d>\"",
         "send \"y\\r\"",
+        
+        
         "expect \"e/n/d/r/c/s/q>\"",
+        "send \"n\\r\"",
+        "expect \"name>\"",
+        "send \"jekyll\\r\"",
+        "expect \"Storage>\"",
+        "send \"cache\\r\"",
+        "expect \"remote>\"",
+        "send \"drive:"+userOptions["-jekyllFolderPath"]+"\\r\"",
+        "expect \"plex_url>\"",
+        "send \"\\r\"",
+        "expect \"plex_username>\"",
+        "send \"\\r\"",
+        "expect \"y/g/n>\"",
+        "send \"n\\r\"",
+        "expect \"chunk_size>\"",
+        "send \"10M\\r\"",
+        "expect \"info_age>\"",
+        "send \"1y\\r\"",
+        "expect \"chunk_total_size>\"",
+        "send \"1G\\r\"",
+        "expect \"y/n>\"",
+        "send \"n\\r\"",
+        "expect \"y/e/d>\"",
+        "send \"y\\r\"",
+        
         "send \"q\\r\""
     ])
 
