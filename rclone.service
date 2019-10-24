@@ -1,16 +1,18 @@
 [Unit]
-Description=RClone Service
+Description=RClone
+AssertPathIsDirectory=/mnt/rclone
 Wants=network-online.target
 After=network-online.target
  
 [Service]
-Type=notify
+Type=simple
 Environment=RCLONE_CONFIG=/root/.config/rclone/rclone.conf
 
 ExecStart=/usr/bin/rclone mount Documents: /mnt/rclone --cache-dir /var/cache/rclone --vfs-cache-max-age 25h0m0s --vfs-cache-mode full --vfs-cache-poll-interval 55m0s --vfs-cache-max-size 5G --allow-other
 
-ExecStop=/usr/local/sbin/stopRcloneMount
-Restart=on-failure
+ExecStop=/bin/fusermount -u /mnt/rclone
+Restart=always
+RestartSec=4
  
 [Install]
 WantedBy=default.target
