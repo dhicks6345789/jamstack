@@ -19,9 +19,6 @@ def runCommand(theCommand):
 
 @app.route("/build")
 def build():
-    output = "OK"
-    status = "200 OK"
-
     processRunning = False
     for psLine in runCommand("ps ax").split("\n"):
         if not psLine.find("build.sh") == -1:
@@ -32,16 +29,14 @@ def build():
     if request.args.get("action") == "run":
         if not processRunning:
             os.system("bash /usr/local/bin/build.sh &")
-        else:
-            output = "ALREADYRUNNING"
-    else:
-        output = "NOT"
+        return "RUNNING"
+    if request.args.get("action") == "query":
         if processRunning:
-            output = "RUNNING"
-
-    response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
-    start_response(status, response_headers)
-    return [output]
-
+            return "RUNNING"
+        else:
+            return "NOTRUNNING"
+    else:
+        return app.send_static_file("build.html")
+    
 if __name__ == "__main__":
     app.run()
