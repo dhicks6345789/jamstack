@@ -275,3 +275,6 @@ os.system("systemctl start rclone-content")
 os.system("systemctl start rclone-jekyll")
 os.system("systemctl enable rclone-content")
 os.system("systemctl enable rclone-jekyll")
+
+# Copy accross the build.sh script.
+copyfile("build.sh", "/usr/local/bin/build.sh", mode="755")
