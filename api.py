@@ -26,11 +26,11 @@ def build():
         if not psLine.find("jekyll") == -1:
             processRunning = True
 
-    if request.args.get("action") == "run":
+    if flask.request.args.get("action") == "run":
         if not processRunning:
             os.system("bash /usr/local/bin/build.sh &")
         return "RUNNING"
-    if request.args.get("action") == "query":
+    elif flask.request.args.get("action") == "query":
         if processRunning:
             return "RUNNING"
         else:
