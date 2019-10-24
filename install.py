@@ -259,13 +259,19 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
     ])
 
 # Set up rclone to mount the user's cloud storage - first, stop any existing rclone mount process...
-os.system("systemctl stop rclone")
+os.system("systemctl stop rclone-content")
+os.system("systemctl stop rclone-jekyll")
 # ...make sure FUSE is configured to allow non-root users to access mounts...
 copyfile("fuse.conf", "/etc/fuse.conf", mode="644")
 # ...make sure the mount point and cache folders exist...
-os.makedirs("/mnt/rclone", exist_ok=True)
-os.makedirs("/var/cache/rclone", exist_ok=True)
+os.makedirs("/mnt/content", exist_ok=True)
+os.makedirs("/mnt/jekyll", exist_ok=True)
+os.makedirs("/var/cache/rclone-content", exist_ok=True)
+os.makedirs("/var/cache/rclone-jekyll", exist_ok=True)
 # ...then set up systemd to mount the repository.
-copyfile("rclone.service", "/etc/systemd/system/rclone.service", mode="644")
-os.system("systemctl start rclone")
-os.system("systemctl enable rclone")
+copyfile("rclone-content.service", "/etc/systemd/system/rclone-content.service", mode="644")
+copyfile("rclone-jekyll.service", "/etc/systemd/system/rclone-content.jekyll", mode="644")
+os.system("systemctl start rclone-content")
+os.system("systemctl start rclone-jekyll")
+os.system("systemctl enable rclone-content")
+os.system("systemctl enable rclone-jekyll")
