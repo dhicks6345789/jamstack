@@ -7,7 +7,7 @@ import shutil
 
 # Parse any options set by the user on the command line.
 validBooleanOptions = []
-validValueOptions = ["-domainName"]
+validValueOptions = ["-domainName", "-rootFolderID"]
 userOptions = {}
 optionCount = 1
 while optionCount < len(sys.argv):
@@ -170,6 +170,7 @@ os.system("apachectl start")
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
     print("Configuring rclone...")
+    getUserOption("-rootFolderID", "Please enter the Google Drivefolder ID for the root folder")
     runExpect([
         "spawn /usr/bin/rclone config",
         "expect \"n/s/q>\"",
@@ -181,17 +182,13 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "expect \"client_id>\"",
         "expect_user -timeout 3600 -re \"(.*)\\n\"",
         "send \"$expect_out(1,string)\\r\"",
-        #"send \"556680234914-khamoi3j7tf3d723pe3n9u5ipvnlbsq5.apps.googleusercontent.com\\r\"",
         "expect \"client_secret>\"",
         "expect_user -timeout 3600 -re \"(.*)\\n\"",
         "send \"$expect_out(1,string)\\r\"",
-        #"send \"FZ-AFSv5AORIroYBf93fvS7v\\r\"",
         "expect \"scope>\"",
         "send \"drive.readonly\\r\"",
         "expect \"root_folder_id>\"",
-        "expect_user -timeout 3600 -re \"(.*)\\n\"",
-        "send \"$expect_out(1,string)\\r\"",
-        #"send \"\\r\"",
+        "send \""+userOptions["-domainName"]+"\\r\"",
         "expect \"service_account_file>\"",
         "send \"\\r\"",
         "expect \"y/n>\"",
