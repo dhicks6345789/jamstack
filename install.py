@@ -124,6 +124,9 @@ runIfPathMissing("/usr/bin/expect", "apt-get -y install expect")
 # Make sure rclone (for mounting cloud-based filesystems such as Google Drive) is installed.
 runIfPathMissing("/usr/bin/rclone", "curl https://rclone.org/install.sh | sudo bash")
 
+# Make sure FUSE (for mounting user filesystems, used by rclone) is installed.
+runIfPathMissing("/usr/bin/fusermount", "apt-get -y install fuse")
+
 # Make sure Apache (web server) is installed...
 runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
 # ...with SSL enabled...
@@ -164,6 +167,7 @@ copyfile("api.py", "/var/www/api/api.py", mode="0744")
 # Start Apache back up again.
 os.system("apachectl start")
 
+# Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
     print("Configuring rclone...")
     runExpect([
@@ -230,20 +234,11 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
         "send \"q\\r\""
     ])
 
-# Ensure the content repository is mounted - first, make sure any existing mount process is ended...
-psHandle = os.popen("ps ax")
-for psLine in psHandle.readlines():
-    if "rclone mount" in psLine:
-        print("Unmounting content repository...")
-        os.system("kill " + psLine.split()[0])
-psHandle.close()
-# ...make sure FUSE is configured to allow non-root users to access mounts...
-copyfile("/root/code/fuse.conf", "/etc/fuse.conf", mode="644")
+# Make sure Rclone is set up so it can be used to mount the user's cloud storage - first, make sure FUSE is configured
+# to allow non-root users to access mounts...
+copyfile("fuse.conf", "/etc/fuse.conf", mode="644")
 # ...then, make sure the mount point and cache folders exist...
 os.makedirs("/mnt/rclone", exist_ok=True)
 os.makedirs("/var/cache/rclone", exist_ok=True)
-# ...then mount the repository.
-print("Mounting content repository...")
-os.system("rclone mount code:Projects/AccessDisputesCommitteeContent /mnt/rclone --cache-dir /var/cache/rclone --vfs-cache-max-age 25h0m0s --vfs-cache-mode full --vfs-cache-poll-interval 55m0s --vfs-cache-max-size 5G --allow-other &")
-# Pause for a moment to make sure rclone has got the content repository mounted.
-time.sleep(4)
+# ...then set up systemd to mount the repository.
+copyfile("rclone.service", "/etc/systemd/system/rclone.service", mode="644")
