@@ -106,6 +106,9 @@ os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
 # Note that we need version 2.7.1, released March 2019, as it contains a bug fix to handle O365-created DOCX files properly - the version included by Debian Stretch is not yet up to date.
 runIfPathMissing("/usr/bin/pandoc", "wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-1-amd64.deb; dpkg -i pandoc-2.7.1-1-amd64.deb; rm pandoc-2.7.1-1-amd64.deb")
 
+# Make sure Flask (Python web-publishing framework) is installed.
+installLib.runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/flask", "pip install Flask")
+
 # Make sure XLRD (Python library for handling Excel files, required for Excel support in Pandas) is installed.
 runIfPathMissing("/usr/local/lib/"+pythonVersion+"/dist-packages/xlrd", "pip3 install xlrd")
 
