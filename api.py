@@ -23,8 +23,6 @@ def build():
     for psLine in runCommand("ps ax").split("\n"):
         if not psLine.find("build.sh") == -1:
             processRunning = True
-        if not psLine.find("jekyll") == -1:
-            processRunning = True
 
     if flask.request.args.get("action") == "run":
         if not processRunning:
