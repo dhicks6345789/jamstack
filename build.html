@@ -15,26 +15,29 @@
 		
 		<script>
 			var rebuildInterval = setInterval(checkRebuildStatus, 10000);
+			function doAPICall(queryString, successFunction) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = successFunction;
+				xhttp.open("GET", "/api/" + queryString, true);
+				xhttp.send();
+			}
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
+				doAPICall("build?action=run", function() {
 					document.getElementById("responseOutput").innerHTML = "Working...";
-				};
-				xhttp.open("GET", "/api/build?action=run", true);
-				xhttp.send();
+				});
 			}
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
-						if(xhttp.responseText == "NOTRUNNING") {
-							document.getElementById("rebuildWebsiteButton").disabled = false;
-						} else {
+						if(xhttp.responseText == "RUNNING") {
 							document.getElementById("responseOutput").innerHTML = xhttp.responseText;
+						} else {
+							document.getElementById("rebuildWebsiteButton").disabled = false;
 						}
 					};
-					xhttp.open("GET", "/api/build?action=query", true);
+					xhttp.open("GET", "/api/build?action=getStatus", true);
 					xhttp.send();
 				}
 			}
