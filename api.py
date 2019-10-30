@@ -34,7 +34,8 @@ def build():
         else:
             return "NOTRUNNING"
     else:
-        return app.send_static_file("/var/www/api/build.html")
+        return "Bananas"
+        #return app.send_static_file("/var/www/api/build.html")
     
 if __name__ == "__main__":
     app.run()
