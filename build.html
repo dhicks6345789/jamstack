@@ -14,14 +14,10 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		
 		<script>
-			var rebuildInterval = setInterval(checkRebuildStatus, 10000);
-			function doAPICall(queryString, successFunction) {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = successFunction;
-				xhttp.open("GET", "/api/" + queryString, true);
-				xhttp.send();
-			}
+			var rebuildInterval;
+			
 			function rebuildWebsite() {
+				rebuildInterval = setInterval(checkRebuildStatus, 10000);
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
 				$.ajax("/api/build?action=run", {
@@ -30,6 +26,7 @@
 					}
 				});
 			}
+			
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					$.ajax("build?action=getStatus", {
@@ -37,6 +34,7 @@
 							if(status == "NOTRUNNING") {
 								document.getElementById("rebuildWebsiteButton").disabled = false;
 								document.getElementById("rebuildWebsiteButton").innerHTML = "Rebuild"
+								clearInterval(rebuildInterval);
 							}
 							$.ajax("build?action=getLogs", {
 								success: function(logText) {
@@ -47,6 +45,16 @@
 					});
 				}
 			}
+			
+			$(document).ready(function() {
+				$.ajax("build?action=getStatus", {
+					success: function(status) {
+						if(status == "RUNNING") {
+							rebuildWebsite();
+						}
+					}
+				});
+			});
 		</script>
 	</head>
 	<body>
