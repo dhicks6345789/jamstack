@@ -12,7 +12,8 @@ def tidyHTML(rootPath):
             if item.lower().endswith("html"):
                 print("Tidying: " + rootPath + os.sep + item)
                 output = ""
-                infile = open(rootPath + os.sep + item, encoding="latin-1")
+                #infile = open(rootPath + os.sep + item, encoding="latin-1")
+                infile = open(rootPath + os.sep + item)
                 for inputLine in infile.readlines():
                     if not inputLine.strip() == "":
                         output = output + inputLine
