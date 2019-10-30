@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>My Start Online</title>
-        
-        <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff"> -->
-        
-        <!-- Load Bootstrap CSS. -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-        <!-- Load Bootstrap's Javascript componenets, along with JQuery and Popper. -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	    
-        <script>
-	    var rebuildInterval = setInterval(checkRebuildStatus, 10000);
-            function rebuildWebsite() {
-                document.getElementById("rebuildWebsiteButton").disabled = true;
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    document.getElementById("responseOutput").innerHTML = "Working...";
-                };
-                xhttp.open("GET", "/api/build?action=run", true);
-                xhttp.send();
-            }
-            function checkRebuildStatus() {
-                if(document.getElementById("rebuildWebsiteButton").disabled) {
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if(xhttp.responseText == "NOTRUNNING") {
-                            document.getElementById("responseOutput").innerHTML = "Done!";
-                            document.getElementById("rebuildWebsiteButton").disabled = false;
-                        }
-                    };
-                    xhttp.open("GET", "/api/build?action=run?action=query", true);
-                    xhttp.send();
-                }
-            }
-        </script>
-    </head>
-    <body>
-        <h1 class="text-center" id="mainTitle">Rebuild Website</h1>
-	<p class="text-center">Click the button below to rebuild the website.</p>
-	<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite() class="btn btn-primary">Rebuild</button>
-        <p id="responseOutput"></p>
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>My Start Online</title>
+		
+		<!-- Load Bootstrap CSS. -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<!-- Load Bootstrap's Javascript componenets, along with JQuery and Popper. -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		<script>
+			var rebuildInterval = setInterval(checkRebuildStatus, 10000);
+			function rebuildWebsite() {
+				document.getElementById("rebuildWebsiteButton").disabled = true;
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					document.getElementById("responseOutput").innerHTML = "Working...";
+				};
+				xhttp.open("GET", "/api/build?action=run", true);
+				xhttp.send();
+			}
+			function checkRebuildStatus() {
+				if(document.getElementById("rebuildWebsiteButton").disabled) {
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if(xhttp.responseText == "NOTRUNNING") {
+							document.getElementById("responseOutput").innerHTML = "Done!";
+							document.getElementById("rebuildWebsiteButton").disabled = false;
+						}
+					};
+					xhttp.open("GET", "/api/build?action=run?action=query", true);
+					xhttp.send();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1 class="text-center" id="mainTitle">Rebuild Website</h1>
+		<div class="text-center">
+			<p>Click the button below to rebuild the website.</p>
+			<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
+			<p id="responseOutput"></p>
+		</div>
+	</body>
 </html>
