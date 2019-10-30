@@ -36,7 +36,7 @@ def build():
         return "RUNNING"
     elif flask.request.args.get("action") == "query":
         if processRunning:
-            return "RUNNING"
+            return getFile("/var/log/build.log")
         else:
             return "NOTRUNNING"
     else:
