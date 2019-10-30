@@ -169,6 +169,7 @@ copyfile("api.wsgi", "/var/www/api.wsgi", mode="0744")
 # Copy over the API.
 os.makedirs("/var/www/api", exist_ok=True)
 copyfile("api.py", "/var/www/api/api.py", mode="0744")
+copyfile("build.html", "/var/www/api/build.html", mode="744")
 # Start Apache back up again.
 os.system("apachectl start")
 
