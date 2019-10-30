@@ -23,6 +23,7 @@
 			}
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
+				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Working..."
 				$.ajax("/api/build?action=run", {
 					success: function(runResult) {
 						document.getElementById("responseOutput").innerHTML = "Working...";
