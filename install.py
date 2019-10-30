@@ -97,7 +97,7 @@ runIfPathMissing("/usr/share/doc/zlib1g-dev", "apt-get install -y zlib1g-dev")
 runIfPathMissing("/usr/share/doc/ruby-dev", "apt-get install -y ruby-dev")
 
 # Make sure Jekyll (static site generation tool) is installed.
-runIfPathMissing("/usr/local/bin/jekyll", "gem install bundler jekyll")
+runIfPathMissing("/usr/local/bin/jekyll", "gem install bundler jekyll concurrent-ruby")
 #runIfPathMissing("/root/.bundle", "bundle install")
 #os.system("mkdir /.bundle > /dev/null 2>&1")
 #os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
