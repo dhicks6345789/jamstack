@@ -23,20 +23,24 @@
 			}
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
-				doAPICall("build?action=run", function() {
-					document.getElementById("responseOutput").innerHTML = "Working...";
+				$.ajax("/api/build?action=run", {
+					success: function(data) {
+						document.getElementById("responseOutput").innerHTML = "Working...";
+					}
 				});
 			}
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
-					doAPICall("build?action=getStatus", function() {
-						if(xhttp.responseText == "RUNNING") {
-							document.getElementById("responseOutput").innerHTML = xhttp.responseText;
-						} else {
-							document.getElementById("rebuildWebsiteButton").disabled = false;
-						}
-					});
-				}
+					$.ajax("build?action=getStatus", {
+					success: function(data) {
+						console.log(data);
+						//if(xhttp.responseText == "RUNNING") {
+						//	document.getElementById("responseOutput").innerHTML = xhttp.responseText;
+						//} else {
+						//	document.getElementById("rebuildWebsiteButton").disabled = false;
+						//}
+					}
+				});
 			}
 		</script>
 	</head>
