@@ -99,8 +99,8 @@ runIfPathMissing("/usr/share/doc/ruby-dev", "apt-get install -y ruby-dev")
 # Make sure Jekyll (static site generation tool) is installed.
 runIfPathMissing("/usr/local/bin/jekyll", "gem install bundler jekyll concurrent-ruby")
 runIfPathMissing("/root/.bundle", "bundle install")
-#os.system("mkdir /.bundle > /dev/null 2>&1")
-#os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
+os.system("mkdir /.bundle > /dev/null 2>&1")
+os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
 
 # Make sure Pandoc (conversion utility for converting various file formats, in this case DOCX to Markdown) is installed.
 # Note that we need version 2.7.1, released March 2019, as it contains a bug fix to handle O365-created DOCX files properly - the version included by Debian Stretch is not yet up to date.
