@@ -11,6 +11,6 @@ jekyllRuntime=$(( SECONDS - docsToMarkdownRuntime ))
 echo "Jekyll run time: $jekyllRuntime seconds." >> /var/log/build.log
 /usr/local/bin/tidyHTML.py /var/www/html >> /var/log/build.log 2>&1
 tidyRuntime=$(( SECONDS - jekyllRuntime ))
-totalRuntime=$(( tidyRuntime - startTime ))
+totalRuntime=$(( SECONDS - startTime ))
 echo "Tidy run time: $tidyRuntime seconds." >> /var/log/build.log
 echo "Done! Total run time: $totalRuntime seconds." >> /var/log/build.log
