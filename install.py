@@ -142,6 +142,7 @@ runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y c
 # /var/www/html is written by the build process run via a WSGI process, running as the www-data user, so the www-data user
 # needs to be able to write in /var/www/html.
 os.system("chown www-data:www-data /var/www/html")
+os.system("chown www-data:www-data /var/www/html/index.html")
 
 getUserOption("-domainName", "Please enter this site's domain name")
 
