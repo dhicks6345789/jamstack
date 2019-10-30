@@ -29,8 +29,9 @@
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
 						if(xhttp.responseText == "NOTRUNNING") {
-							document.getElementById("responseOutput").innerHTML = "Done!";
 							document.getElementById("rebuildWebsiteButton").disabled = false;
+						} else {
+							document.getElementById("responseOutput").innerHTML = xhttp.responseText;
 						}
 					};
 					xhttp.open("GET", "/api/build?action=run?action=query", true);
