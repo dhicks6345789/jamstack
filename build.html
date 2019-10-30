@@ -23,10 +23,10 @@
 			}
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
-				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Working..."
+				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
 				$.ajax("/api/build?action=run", {
 					success: function(runResult) {
-						document.getElementById("responseOutput").innerHTML = "Working...";
+						document.getElementById("responseOutput").innerHTML = "";
 					}
 				});
 			}
@@ -36,6 +36,7 @@
 						success: function(status) {
 							if(status == "NOTRUNNING") {
 								document.getElementById("rebuildWebsiteButton").disabled = false;
+								document.getElementById("rebuildWebsiteButton").innerHTML = "Rebuild"
 							}
 							$.ajax("build?action=getLogs", {
 								success: function(logText) {
@@ -56,38 +57,6 @@
 			</p>
 			<p>
 				<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
-			</p>
-			<p>
-				<!-- "Loading" animation - MIT licensed SVG by Sam Herbet, with many thanks. See: https://github.com/SamHerbert/SVG-Loaders -->
-				<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-					<g transform="translate(2 1)" stroke="#FFFFFF" stroke-width="1.5">
-						<rect fill="#FFFFFF" x="0" y="0" width="100" height="100"></rect>
-						<circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#3C81C1" stroke="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="1;0;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;1;0;0;0;0;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;1;0;0;0;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;1;0;0;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;1;0;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;1;0;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;1;0" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-						<circle cx="27" cy="5" r="5" fill-opacity="0" fill="#3C81C1">
-							<animate attributeName="fill-opacity" begin="0s" dur="1.3s" values="0;0;0;0;0;0;0;1" calcMode="linear" repeatCount="indefinite"/>
-						</circle>
-					</g>
-				</svg>
 			</p>
 			<p>
 				<textarea rows="32" cols="128" readonly class="text-monospace" id="responseOutput"></textarea>
