@@ -7,15 +7,21 @@ import flask
 
 app = flask.Flask(__name__)
 
-@app.route("/")
-def api():
-    return "Hello world!"
+def getFile(theFilename):
+    fileDataHandle = open(theFilename)
+    fileData = fileDataHandle.read()
+    fileDataHandle.close()
+    return(fileData)
 
 def runCommand(theCommand):
     commandHandle = os.popen(theCommand)
     result = commandHandle.read()
     commandHandle.close()
     return(result)
+
+@app.route("/")
+def api():
+    return "Hello world!"
 
 @app.route("/build")
 def build():
@@ -34,8 +40,7 @@ def build():
         else:
             return "NOTRUNNING"
     else:
-        return "Bananas"
-        #return app.send_static_file("/var/www/api/build.html")
+        return getFile("/var/www/api/build.html")
     
 if __name__ == "__main__":
     app.run()
