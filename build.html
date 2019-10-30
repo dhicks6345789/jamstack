@@ -24,7 +24,7 @@
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				$.ajax("/api/build?action=run", {
-					success: function(data) {
+					success: function(runResult) {
 						document.getElementById("responseOutput").innerHTML = "Working...";
 					}
 				});
@@ -32,13 +32,15 @@
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					$.ajax("build?action=getStatus", {
-						success: function(data) {
-							console.log(data);
-							//if(xhttp.responseText == "RUNNING") {
-							//	document.getElementById("responseOutput").innerHTML = xhttp.responseText;
-							//} else {
-							//	document.getElementById("rebuildWebsiteButton").disabled = false;
-							//}
+						success: function(status) {
+							if(status == "NOTRUNNING") {
+								document.getElementById("rebuildWebsiteButton").disabled = false;
+							}
+							$.ajax("build?action=getLogs", {
+								success: function(logText) {
+									document.getElementById("responseOutput").innerHTML = logText;
+								}
+							});
 						}
 					});
 				}
