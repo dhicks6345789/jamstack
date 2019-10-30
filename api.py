@@ -34,11 +34,13 @@ def build():
         if not processRunning:
             os.system("bash /usr/local/bin/build.sh &")
         return "RUNNING"
-    elif flask.request.args.get("action") == "query":
+    elif flask.request.args.get("action") == "getStatus":
         if processRunning:
-            return getFile("/var/log/build.log")
+            return "RUNNING"
         else:
             return "NOTRUNNING"
+    elif flask.request.args.get("action") == "getLogs":
+        return getFile("/var/log/build.log")
     else:
         return getFile("/var/www/api/build.html")
     
