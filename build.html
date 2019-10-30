@@ -29,16 +29,13 @@
 			}
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
-					var xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
+					doAPICall("build?action=getStatus", function() {
 						if(xhttp.responseText == "RUNNING") {
 							document.getElementById("responseOutput").innerHTML = xhttp.responseText;
 						} else {
 							document.getElementById("rebuildWebsiteButton").disabled = false;
 						}
-					};
-					xhttp.open("GET", "/api/build?action=getStatus", true);
-					xhttp.send();
+					});
 				}
 			}
 		</script>
