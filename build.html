@@ -32,15 +32,16 @@
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					$.ajax("build?action=getStatus", {
-					success: function(data) {
-						console.log(data);
-						//if(xhttp.responseText == "RUNNING") {
-						//	document.getElementById("responseOutput").innerHTML = xhttp.responseText;
-						//} else {
-						//	document.getElementById("rebuildWebsiteButton").disabled = false;
-						//}
-					}
-				});
+						success: function(data) {
+							console.log(data);
+							//if(xhttp.responseText == "RUNNING") {
+							//	document.getElementById("responseOutput").innerHTML = xhttp.responseText;
+							//} else {
+							//	document.getElementById("rebuildWebsiteButton").disabled = false;
+							//}
+						}
+					});
+				}
 			}
 		</script>
 	</head>
