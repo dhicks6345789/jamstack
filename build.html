@@ -16,6 +16,14 @@
 		<script>
 			var rebuildInterval;
 			
+			function getLogs() {
+				$.ajax("build?action=getLogs", {
+					success: function(logText) {
+						document.getElementById("responseOutput").innerHTML = logText;
+					}
+				});
+			}
+			
 			function rebuildWebsite() {
 				rebuildInterval = setInterval(checkRebuildStatus, 10000);
 				document.getElementById("rebuildWebsiteButton").disabled = true;
@@ -23,6 +31,7 @@
 				$.ajax("/api/build?action=run", {
 					success: function(runResult) {
 						document.getElementById("responseOutput").innerHTML = "";
+						getLogs();
 					}
 				});
 			}
@@ -36,11 +45,7 @@
 								document.getElementById("rebuildWebsiteButton").innerHTML = "Rebuild"
 								clearInterval(rebuildInterval);
 							}
-							$.ajax("build?action=getLogs", {
-								success: function(logText) {
-									document.getElementById("responseOutput").innerHTML = logText;
-								}
-							});
+							getLogs();
 						}
 					});
 				}
