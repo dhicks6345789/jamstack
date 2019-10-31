@@ -33,10 +33,11 @@
 						console.log("AA" + runResult + "BB");
 						if (runResult == "RUNNING") {
 							getLogs();
-							document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
+							$("#rebuildWebsiteButton").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building...");
 							rebuildInterval = setInterval(checkRebuildStatus, 10000);
 						} else if (runResult == "WRONGPASSWORD") {
-							$("#messageText").html("Wrong password.");
+							$("#messageText").html("<span class=\"text-danger\">Wrong password.</span> - Enter the build password and hit \"Rebuild\" to rebuild the website.");
+							document.getElementById("rebuildWebsiteButton").disabled = false;
 						}
 					}
 				});
