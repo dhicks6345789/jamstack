@@ -24,24 +24,6 @@
 				});
 			}
 			
-			function rebuildWebsite() {
-				document.getElementById("rebuildWebsiteButton").disabled = true;
-				console.log($("#passwordInput").val());
-				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
-					success: function(runResult) {
-						if (runResult == "RUNNING") {
-							getLogs();
-							$("#messageText").html("Enter the build password and hit \"Rebuild\" to rebuild the website.");
-							$("#rebuildWebsiteButton").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building...");
-							rebuildInterval = setInterval(checkRebuildStatus, 10000);
-						} else if (runResult == "WRONGPASSWORD") {
-							$("#messageText").html("<span class=\"text-danger\">Wrong password</span> - enter the build password and hit \"Rebuild\" to rebuild the website.");
-							document.getElementById("rebuildWebsiteButton").disabled = false;
-						}
-					}
-				});
-			}
-			
 			function checkRebuildStatus() {
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					$.ajax("build?action=getStatus", {
@@ -61,13 +43,26 @@
 				$.ajax("build?action=getStatus", {
 					success: function(status) {
 						if(status == "RUNNING") {
-							rebuildWebsite();
+							rebuildInterval = setInterval(checkRebuildStatus, 10000);
 						}
 					}
 				});
 				$("#rebuildForm").on("submit", function(theEvent) {
 					theEvent.preventDefault();
-					rebuildWebsite();
+					document.getElementById("rebuildWebsiteButton").disabled = true;
+					$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
+						success: function(runResult) {
+							if (runResult == "RUNNING") {
+								getLogs();
+								$("#messageText").html("Enter the build password and hit \"Rebuild\" to rebuild the website.");
+								$("#rebuildWebsiteButton").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building...");
+								rebuildInterval = setInterval(checkRebuildStatus, 10000);
+							} else if (runResult == "WRONGPASSWORD") {
+								$("#messageText").html("<span class=\"text-danger\">Wrong password</span> - enter the build password and hit \"Rebuild\" to rebuild the website.");
+								document.getElementById("rebuildWebsiteButton").disabled = false;
+							}
+						}
+					});
 				});
 			});
 		</script>
