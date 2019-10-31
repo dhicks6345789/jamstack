@@ -25,16 +25,17 @@
 			}
 			
 			function rebuildWebsite() {
+				$("#responseOutput").innerHTML = "";
 				rebuildInterval = setInterval(checkRebuildStatus, 10000);
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
 				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
 					success: function(runResult) {
+						console.log(runResult);
 						if (runResult == "RUNNING") {
-							document.getElementById("responseOutput").innerHTML = "";
 							getLogs();
 						} else if (runResult == "WRONGPASSWORD") {
-							$("#messageText").innerHTML = "Wrong password."
+							$("#messageText").innerHTML = "Wrong password.";
 						}
 					}
 				});
