@@ -19,7 +19,7 @@
 			function getLogs() {
 				$.ajax("build?action=getLogs", {
 					success: function(logText) {
-						document.getElementById("responseOutput").innerHTML = logText;
+						$("#responseOutput").html(logText);
 					}
 				});
 			}
@@ -27,16 +27,14 @@
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				$("#responseOutput").html("");
-				
 				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
 					success: function(runResult) {
-						console.log("AA" + runResult + "BB");
 						if (runResult == "RUNNING") {
 							getLogs();
 							$("#rebuildWebsiteButton").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building...");
 							rebuildInterval = setInterval(checkRebuildStatus, 10000);
 						} else if (runResult == "WRONGPASSWORD") {
-							$("#messageText").html("<span class=\"text-danger\">Wrong password.</span> - Enter the build password and hit \"Rebuild\" to rebuild the website.");
+							$("#messageText").html("<span class=\"text-danger\">Wrong password</span> - enter the build password and hit \"Rebuild\" to rebuild the website.");
 							document.getElementById("rebuildWebsiteButton").disabled = false;
 						}
 					}
