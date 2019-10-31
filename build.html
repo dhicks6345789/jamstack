@@ -68,7 +68,7 @@
 		</script>
 	</head>
 	<body>
-		<form>
+		<form onsubmit="rebuildWebsite()">
 			<h1 class="text-center" id="mainTitle">Rebuild Website</h1>
 			<p id="messageText" class="text-center">
 				Enter the build password and hit "Rebuild" to rebuild the website.
@@ -83,7 +83,7 @@
 				</div>
 			</p>
 			<p class="text-center">
-				<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
+				<button type="submit" id="rebuildWebsiteButton" class="btn btn-primary">Rebuild</button>
 			</p>
 			<p class="text-center">
 				<textarea rows="32" cols="160" readonly class="text-monospace" id="responseOutput"></textarea>
