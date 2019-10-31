@@ -299,7 +299,7 @@ os.system("chown www-data:www-data /var/local/docsToMarkdown.json")
 # Make sure we have a (hashed) build password stored.
 if not os.path.exists("/var/local/buildPassword.txt"):
     getUserOption("-buildPassword", "Enter a password to use for site rebuilds")
-    correctPasswordHash = hashlib.sha256(userOptions["-buildPassword"]).hexdigest()
+    correctPasswordHash = hashlib.sha256(userOptions["-buildPassword"]).encode("utf-8").hexdigest()
     writeFile("/var/local/buildPassword.txt", correctPasswordHash)
     os.system("chown www-data:www-data /var/local/buildPassword.txt")
     
