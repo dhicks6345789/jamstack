@@ -27,6 +27,7 @@
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				$("#responseOutput").html("");
+				console.log($("#passwordInput").val());
 				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
 					success: function(runResult) {
 						if (runResult == "RUNNING") {
