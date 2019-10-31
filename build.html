@@ -65,8 +65,8 @@
 	</head>
 	<body>
 		<h1 class="text-center" id="mainTitle">Rebuild Website</h1>
-		<div class="form-group row">
-			<div class="col-lg-4 col-lg-offset-4">
+		<div class="row" style="margin: 0 auto; float: none;">
+			<div class="col-lg-2">
 				<div class="input-group">
 					<label for="passwordInput">Password</label>
 					<input type="password" class="form-control" id="passwordInput" placeholder="Password">
@@ -78,16 +78,6 @@
 				<p>
 					Enter the build password to rebuild the website.
 				</p>
-				<div class="row" style="margin: 0 auto; float: none;">
-					<div class="col-lg-4 col-lg-offset-4">
-						<div class="input-group">
-							<input type="text" class="form-control"/> 
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">Go!</button>
-							</span>
-						</div>
-					</div>
-				</div>
 				<p>
 					<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
 				</p>
