@@ -10,7 +10,7 @@ Template [JAMStack](https://jamstack.org/)-style project built on:
 
 ## Installation
 
-On a Linux server (currently tested on Debian 10), you can clone the project and run the install script as root:
+On a Linux server (currently tested on Debian 10 "Buster"), you can clone the project and run the install script as root:
 ```
 git clone https://github.com/dhicks6345789/jamstack.git
 cd jamstack
@@ -18,7 +18,7 @@ python3 install.py
 ```
 This will step through the installation and configuration of your system with the above packages, leaving you with a basic template website to start adding content and functionality to.
 
-The recommended approach is to duplicate this project so you have your own editable version you can extend to add any further requiremnets or content to.
+The recommended approach is to duplicate this project so you have your own editable version you can extend to add any further requirements or content to.
 
 ## Main Points Of Interest
 
