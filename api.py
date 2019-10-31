@@ -16,7 +16,7 @@ def getFile(theFilename):
     return(fileData)
 
 def putFile(theFilename, theData):
-    fileDataHandle = open(theFilename, encoding="latin-1", "w")
+    fileDataHandle = open(theFilename, "w", encoding="latin-1")
     fileDataHandle.write(fileData)
     fileDataHandle.close()
 
