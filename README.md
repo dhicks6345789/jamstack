@@ -1,12 +1,12 @@
 # JAMStack
-Template JAMStack project built on:
-* Linux (or Windows, MacOS)
-* RClone (Google Drive, OneDrive, DropBox, etc)
-* Flask / Python3
-* Apache (or NGINX)
-* Pandoc (via [DocsToMarkdown](https://github.com/dhicks6345789/docs-to-markdown))
-* Jekyll (or Hugo)
-* GOV.UK Design System (or other template)
+Template [JAMStack](https://jamstack.org/)-style project built on:
+* Linux ([Debian 10 "Buster"](https://wiki.debian.org/DebianBuster), or Windows, MacOS)
+* [RClone](https://rclone.org/) ([Google Drive](https://drive.google.com), [OneDrive](https://onedrive.live.com), [DropBox](https://www.dropbox.com), etc)
+* [Flask](https://pypi.org/project/Flask/) / [Python](https://www.python.org/)
+* [Apache](https://httpd.apache.org/) (or NGINX)
+* [Pandoc](https://pandoc.org/) (via my own [DocsToMarkdown](https://github.com/dhicks6345789/docs-to-markdown))
+* [Jekyll](https://jekyllrb.com/) (or Hugo)
+* [GOV.UK Design System](https://design-system.service.gov.uk/) (or other template)
 
 ## Installation
 
