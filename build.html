@@ -25,6 +25,7 @@
 			}
 			
 			function rebuildWebsite() {
+				console.log($(#passwordInput).value);
 				rebuildInterval = setInterval(checkRebuildStatus, 10000);
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
@@ -65,12 +66,18 @@
 	<body>
 		<h1 class="text-center" id="mainTitle">Rebuild Website</h1>
 		<div class="text-center">
-			<p>
-				Click the button below to rebuild the website.
-			</p>
-			<p>
-				<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
-			</p>
+			<form>
+				<div class="form-group">
+					<label for="passwordInput">Password</label>
+					<input type="password" class="form-control" id="passwordInput" placeholder="Password">
+				</div>
+				<p>
+					Click the button below to rebuild the website.
+				</p>
+				<p>
+					<button type="submit" id="rebuildWebsiteButton" onclick="rebuildWebsite()" class="btn btn-primary">Rebuild</button>
+				</p>
+			</form>
 			<p>
 				<textarea rows="32" cols="160" readonly class="text-monospace" id="responseOutput"></textarea>
 			</p>
