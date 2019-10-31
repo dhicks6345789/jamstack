@@ -2,6 +2,7 @@
 import os
 import re
 import cgi
+import hashlib
 
 # The Flask library.
 import flask
@@ -13,6 +14,11 @@ def getFile(theFilename):
     fileData = fileDataHandle.read()
     fileDataHandle.close()
     return(fileData)
+
+def putFile(theFilename, theData):
+    fileDataHandle = open(theFilename, encoding="latin-1", "w")
+    fileDataHandle.write(fileData)
+    fileDataHandle.close()
 
 def runCommand(theCommand):
     commandHandle = os.popen(theCommand)
@@ -32,7 +38,9 @@ def build():
             processRunning = True
 
     if flask.request.args.get("action") == "run":
-        if flask.request.args.get("password") == "Wombat":
+        correctPasswordHash = getFile("/var/local/buildPassword.txt")
+        passedPasswordHash = hashlib.sha256(flask.request.args.get("password")).hexdigest()        
+        if passedPasswordHash == correctPasswordHash:
             if not processRunning:
                 os.system("bash /usr/local/bin/build.sh &")
             return "RUNNING"
