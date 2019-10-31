@@ -24,8 +24,7 @@
 				});
 			}
 			
-			function rebuildWebsite(theEvent) {
-				theEvent.preventDefault();
+			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				console.log($("#passwordInput").val());
 				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
@@ -65,11 +64,15 @@
 						}
 					}
 				});
+				$("#rebuildForm").on("submit", function(theEvent) {
+					theEvent.preventDefault();
+					rebuildWebsite();
+				});
 			});
 		</script>
 	</head>
 	<body>
-		<form onsubmit="rebuildWebsite()">
+		<form id="rebuildForm">
 			<h1 class="text-center" id="mainTitle">Rebuild Website</h1>
 			<p id="messageText" class="text-center">
 				Enter the build password and hit "Rebuild" to rebuild the website.
