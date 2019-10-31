@@ -25,16 +25,15 @@
 			}
 			
 			function rebuildWebsite() {
-				console.log($("#passwordInput").val());
-				//rebuildInterval = setInterval(checkRebuildStatus, 10000);
-				//document.getElementById("rebuildWebsiteButton").disabled = true;
-				//document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
-				//$.ajax("/api/build?action=run", {
-				//	success: function(runResult) {
-				//		document.getElementById("responseOutput").innerHTML = "";
-				//		getLogs();
-				//	}
-				//});
+				rebuildInterval = setInterval(checkRebuildStatus, 10000);
+				document.getElementById("rebuildWebsiteButton").disabled = true;
+				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
+				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
+					success: function(runResult) {
+						document.getElementById("responseOutput").innerHTML = "";
+						getLogs();
+					}
+				});
 			}
 			
 			function checkRebuildStatus() {
