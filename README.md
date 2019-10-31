@@ -4,7 +4,7 @@ Template JAMStack project built on:
 * RClone (Google Drive, OneDrive, DropBox, etc)
 * Flask / Python3
 * Apache (or NGINX)
-* Pandoc (via https://github.com/dhicks6345789/docs-to-markdown)
+* Pandoc (via [DocsToMarkdown](https://github.com/dhicks6345789/docs-to-markdown))
 * Jekyll (or Hugo)
 * GOV.UK Design System (or other template)
 
