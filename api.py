@@ -1,5 +1,6 @@
 # Standard Python libraries.
 import os
+import re
 import cgi
 
 # The Flask library.
@@ -9,7 +10,7 @@ app = flask.Flask(__name__)
 
 def getFile(theFilename):
     fileDataHandle = open(theFilename, encoding="latin-1")
-    fileData = fileDataHandle.read()
+    fileData = re.sub("\^\[\[\d*m", "", fileDataHandle.read())
     fileDataHandle.close()
     return(fileData)
 
