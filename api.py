@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 
 def getFile(theFilename):
     fileDataHandle = open(theFilename, encoding="latin-1")
-    fileData = re.sub(".\[\d*?m", "", fileDataHandle.read())
+    fileData = fileDataHandle.read()
     fileDataHandle.close()
     return(fileData)
 
@@ -43,7 +43,7 @@ def build():
         else:
             return "NOTRUNNING"
     elif flask.request.args.get("action") == "getLogs":
-        return getFile("/var/log/build.log")
+        return re.sub("\n", "<br/>", re.sub(".\[\d*?m", "", getFile("/var/log/build.log")))
     else:
         return getFile("/var/www/api/build.html")
     
