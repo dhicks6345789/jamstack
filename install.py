@@ -294,3 +294,11 @@ runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubuse
 runIfPathMissing("/var/local/jekyll", "mkdir /var/local/jekyll; chown www-data:www-data /var/local/jekyll")
 copyfile("docsToMarkdown.json", "/var/local/docsToMarkdown.json", mode="644")
 os.system("chown www-data:www-data /var/local/docsToMarkdown.json")
+
+# Make sure we have a (hashed) build password stored.
+if not os.path.exists("/var/local/buildPassword.txt"):
+    getUserOption("-buildPassword", "Enter a password to use for site rebuilds")
+    correctPasswordHash = hashlib.sha256(userOptions["-buildPassword"]).hexdigest()
+    writeFile("/var/local/buildPassword.txt", correctPasswordHash)
+    os.system("chown www-data:www-data /var/local/buildPassword.txt")
+    
