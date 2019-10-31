@@ -43,7 +43,7 @@ def build():
         else:
             return "NOTRUNNING"
     elif flask.request.args.get("action") == "getLogs":
-        return re.sub("\n", "<br/>", re.sub(".\[\d*?m", "", getFile("/var/log/build.log")))
+        return re.sub(".\[\d*?m", "", getFile("/var/log/build.log"))
     else:
         return getFile("/var/www/api/build.html")
     
