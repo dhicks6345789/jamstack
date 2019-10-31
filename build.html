@@ -26,17 +26,17 @@
 			
 			function rebuildWebsite() {
 				document.getElementById("rebuildWebsiteButton").disabled = true;
-				$("#responseOutput").innerHTML = "";
+				$("#responseOutput").html("");
 				
 				$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
 					success: function(runResult) {
-						console.log(runResult);
+						console.log("AA" + runResult + "BB");
 						if (runResult == "RUNNING") {
 							getLogs();
 							document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
 							rebuildInterval = setInterval(checkRebuildStatus, 10000);
 						} else if (runResult == "WRONGPASSWORD") {
-							$("#messageText").innerHTML = "Wrong password.";
+							$("#messageText").html("Wrong password.");
 						}
 					}
 				});
