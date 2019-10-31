@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import shutil
+import hashlib
 
 # Parse any options set by the user on the command line.
 validBooleanOptions = []
