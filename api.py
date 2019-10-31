@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 
 def getFile(theFilename):
     fileDataHandle = open(theFilename, encoding="latin-1")
-    fileData = re.sub("\^\[\[\d*m", "", fileDataHandle.read())
+    fileData = re.sub("\[\d*?m", "", fileDataHandle.read())
     fileDataHandle.close()
     return(fileData)
 
