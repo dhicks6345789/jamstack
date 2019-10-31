@@ -42,12 +42,15 @@
 			$(document).ready(function() {
 				$.ajax("build?action=getStatus", {
 					success: function(status) {
+						console.log(status);
 						if(status == "RUNNING") {
+							getLogs();
 							rebuildInterval = setInterval(checkRebuildStatus, 10000);
 						}
 					}
 				});
 				$("#rebuildForm").on("submit", function(theEvent) {
+					console.log("Form submit!");
 					theEvent.preventDefault();
 					document.getElementById("rebuildWebsiteButton").disabled = true;
 					$.ajax("/api/build?action=run&password="+$("#passwordInput").val(), {
