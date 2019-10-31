@@ -25,6 +25,7 @@
 			}
 			
 			function checkRebuildStatus() {
+				console.log("Check status!");
 				if(document.getElementById("rebuildWebsiteButton").disabled) {
 					$.ajax("build?action=getStatus", {
 						success: function(status) {
