@@ -31,9 +31,11 @@ def build():
             processRunning = True
 
     if flask.request.args.get("action") == "run":
-        if not processRunning:
-            os.system("bash /usr/local/bin/build.sh &")
-        return "RUNNING"
+        if flask.request.args.get("password") == "Wombat":
+            if not processRunning:
+                os.system("bash /usr/local/bin/build.sh &")
+            return "RUNNING"
+        return "WRONGPASSWORD"
     elif flask.request.args.get("action") == "getStatus":
         if processRunning:
             return "RUNNING"
