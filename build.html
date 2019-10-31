@@ -25,7 +25,7 @@
 			}
 			
 			function rebuildWebsite() {
-				console.log($(#passwordInput).value);
+				console.log($("#passwordInput").val());
 				rebuildInterval = setInterval(checkRebuildStatus, 10000);
 				document.getElementById("rebuildWebsiteButton").disabled = true;
 				document.getElementById("rebuildWebsiteButton").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building..."
