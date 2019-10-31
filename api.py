@@ -39,7 +39,7 @@ def build():
 
     if flask.request.args.get("action") == "run":
         correctPasswordHash = getFile("/var/local/buildPassword.txt")
-        passedPasswordHash = hashlib.sha256(flask.request.args.get("password")).hexdigest()        
+        passedPasswordHash = hashlib.sha256(flask.request.args.get("password").encode("utf-8")).hexdigest()
         if passedPasswordHash == correctPasswordHash:
             if not processRunning:
                 os.system("bash /usr/local/bin/build.sh &")
