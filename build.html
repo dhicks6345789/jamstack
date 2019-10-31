@@ -14,8 +14,6 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		
 		<script>
-			var rebuildInterval;
-			
 			function getLogs() {
 				$.ajax("build?action=getLogs", {
 					success: function(logText) {
@@ -32,7 +30,7 @@
 							if(status == "NOTRUNNING") {
 								document.getElementById("rebuildWebsiteButton").disabled = false;
 								document.getElementById("rebuildWebsiteButton").innerHTML = "Rebuild"
-								clearInterval(rebuildInterval);
+								clearInterval(window.rebuildInterval);
 							}
 							getLogs();
 						}
@@ -41,13 +39,16 @@
 			}
 			
 			function setRunning() {
+				document.getElementById("rebuildWebsiteButton").disabled = true;
 				getLogs();
 				$("#messageText").html("Enter the build password and hit \"Rebuild\" to rebuild the website.");
 				$("#rebuildWebsiteButton").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>Building...");
-				rebuildInterval = setInterval(checkRebuildStatus, 10000);
+				window.rebuildInterval = setInterval(checkRebuildStatus, 10000);
 			}
 			
 			$(document).ready(function() {
+				window.rebuildInterval = 0;
+				
 				$.ajax("build?action=getStatus", {
 					success: function(status) {
 						console.log(status);
