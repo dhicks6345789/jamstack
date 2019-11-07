@@ -7,10 +7,10 @@ echo "DocsToMarkdown run time: $docsToMarkdownRuntime seconds." >> /var/log/buil
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 # cd /var/local/jekyll; bundle exec jekyll build --destination /var/www/html --incremental >> /var/log/build.log 2>&1; cd
-jekyllRuntime=$(( SECONDS - docsToMarkdownRuntime ))
+jekyllRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime) ))
 echo "Jekyll run time: $jekyllRuntime seconds." >> /var/log/build.log
 # /usr/local/bin/tidyHTML.py /var/www/html >> /var/log/build.log 2>&1
-tidyRuntime=$(( SECONDS - jekyllRuntime ))
+tidyRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime + jekyllRuntime) ))
 totalRuntime=$(( SECONDS - startTime ))
 echo "Tidy run time: $tidyRuntime seconds." >> /var/log/build.log
 echo "Done! Total run time: $totalRuntime seconds." >> /var/log/build.log
