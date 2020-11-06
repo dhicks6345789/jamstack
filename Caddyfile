@@ -7,7 +7,7 @@
 # sure your domain's A/AAAA DNS records are properly pointed to
 # this machine's public IP, then replace the line below with your
 # domain name.
-<<domainName>>
+<<DOMAINNAME>>
 
 # Set this path to your site's directory.
 root * /usr/share/caddy
