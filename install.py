@@ -131,23 +131,6 @@ runIfPathMissing("/usr/bin/fusermount", "apt-get -y install fuse")
 # Make sure Caddy (web server) is installed.
 runIfPathMissing("/usr/bin/caddy", "echo \"deb [trusted=yes] https://apt.fury.io/caddy/ /\" | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list; apt-get update; apt-get install caddy")
 
-## Make sure Apache (web server) is installed...
-#runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
-## ...with SSL enabled...
-#os.system("a2enmod ssl > /dev/null")
-## ...and mod_rewrite...
-#os.system("a2enmod rewrite > /dev/null")
-## ...along with mod_wsgi...
-#runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi-py3", "apt-get install -y libapache2-mod-wsgi-py3 python-dev")
-#os.system("a2enmod wsgi > /dev/null")
-## ...and Certbot, for Let's Encrypt SSL certificates.
-#runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
-
-## /var/www/html is written by the build process run via a WSGI process, running as the www-data user, so the www-data user
-## needs to be able to write in /var/www/html.
-#os.system("chown www-data:www-data /var/www/html")
-#os.system("chown www-data:www-data /var/www/html/index.html")
-
 getUserOption("-domainName", "Please enter this site's domain name")
 
 # Copy over the Caddy configuration file.
@@ -156,32 +139,7 @@ replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"
 
 sys.exit(0)
 
-# If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
-# Code goes here - check if there's an archived SSL cedtiftcate to unpack.
-print("Set up Let's Encrypt certificate?")
-print("This server needs to have a valid DNS entry pointing at it first - select \"no\" and you'll get a non-SSL server for testing, re-run this script with the \"-redoApacheConfig\" option to change.")
-userSelection = askUserMenu(["Yes - single domain name.","Yes - wildcard domain.","No"])
-# Stop Apache while we update the config.
-os.system("apachectl stop")
-# Pause for a moment to make sure apache has actually stopped.
-time.sleep(4)
-if userSelection == 1:
-    print("Code goes here...")
-    #os.system("certbot")
-elif userSelection == 2:
-    print("Code goes here...")
-elif userSelection == 3:
-    # Copy over the Apache configuration file.
-    copyfile("000-default-without-SSL.conf", "/etc/apache2/sites-available/000-default.conf", mode="0744")
-replaceVariables("/etc/apache2/sites-available/000-default.conf", {"DOMAINNAME":userOptions["-domainName"]})
-# Copy over the WSGI configuration file.
-copyfile("api.wsgi", "/var/www/api.wsgi", mode="0744")
-# Copy over the API.
-os.makedirs("/var/www/api", exist_ok=True)
-copyfile("api.py", "/var/www/api/api.py", mode="0744")
-copyfile("build.html", "/var/www/api/build.html", mode="744")
-# Start Apache back up again.
-os.system("apachectl start")
+
 
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
@@ -304,11 +262,3 @@ runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubuse
 runIfPathMissing("/var/local/jekyll", "mkdir /var/local/jekyll; chown www-data:www-data /var/local/jekyll")
 copyfile("docsToMarkdown.json", "/var/local/docsToMarkdown.json", mode="644")
 os.system("chown www-data:www-data /var/local/docsToMarkdown.json")
-
-# Make sure we have a (hashed) build password stored.
-if not os.path.exists("/var/local/buildPassword.txt"):
-    getUserOption("-buildPassword", "Enter a password to use for site rebuilds")
-    correctPasswordHash = hashlib.sha256(userOptions["-buildPassword"].encode("utf-8")).hexdigest()
-    writeFile("/var/local/buildPassword.txt", correctPasswordHash)
-    os.system("chown www-data:www-data /var/local/buildPassword.txt")
-    
