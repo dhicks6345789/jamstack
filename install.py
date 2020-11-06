@@ -94,7 +94,7 @@ runIfPathMissing("/usr/share/doc/build-essential", "apt-get install -y build-ess
 # Make sure ZLib (compression library, required for building other packages) is installed.
 runIfPathMissing("/usr/share/doc/zlib1g-dev", "apt-get install -y zlib1g-dev")
 
-# Make sure ruby-dev (the Ruby development environment) is installed.
+# Make sure ruby-dev (the Ruby development environment, needed for Jekyll) is installed.
 runIfPathMissing("/usr/share/doc/ruby-dev", "apt-get install -y ruby-dev")
 
 # Make sure Jekyll (static site generation tool) is installed.
@@ -128,17 +128,25 @@ runIfPathMissing("/usr/bin/rclone", "curl https://rclone.org/install.sh | sudo b
 # Make sure FUSE (for mounting user filesystems, used by rclone) is installed.
 runIfPathMissing("/usr/bin/fusermount", "apt-get -y install fuse")
 
-# Make sure Apache (web server) is installed...
-runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
-# ...with SSL enabled...
-os.system("a2enmod ssl > /dev/null")
-# ...and mod_rewrite...
-os.system("a2enmod rewrite > /dev/null")
-# ...along with mod_wsgi...
-runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi-py3", "apt-get install -y libapache2-mod-wsgi-py3 python-dev")
-os.system("a2enmod wsgi > /dev/null")
-# ...and Certbot, for Let's Encrypt SSL certificates.
-runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
+# Make sure Caddy (web server) is installed.
+if not os.path.exists("/etc/caddy"):
+    os.system("echo \"deb [trusted=yes] https://apt.fury.io/caddy/ /\" | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list")
+    os.system("apt-get update")
+    os.system("apt-get install caddy")
+
+sys.exit(0)
+
+## Make sure Apache (web server) is installed...
+#runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
+## ...with SSL enabled...
+#os.system("a2enmod ssl > /dev/null")
+## ...and mod_rewrite...
+#os.system("a2enmod rewrite > /dev/null")
+## ...along with mod_wsgi...
+#runIfPathMissing("/usr/share/doc/libapache2-mod-wsgi-py3", "apt-get install -y libapache2-mod-wsgi-py3 python-dev")
+#os.system("a2enmod wsgi > /dev/null")
+## ...and Certbot, for Let's Encrypt SSL certificates.
+#runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
 # /var/www/html is written by the build process run via a WSGI process, running as the www-data user, so the www-data user
 # needs to be able to write in /var/www/html.
