@@ -131,8 +131,6 @@ runIfPathMissing("/usr/bin/fusermount", "apt-get -y install fuse")
 # Make sure Caddy (web server) is installed.
 runIfPathMissing("/usr/bin/caddy", "echo \"deb [trusted=yes] https://apt.fury.io/caddy/ /\" | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list; apt-get update; apt-get install caddy")
 
-sys.exit(0)
-
 ## Make sure Apache (web server) is installed...
 #runIfPathMissing("/etc/apache2", "apt-get install -y apache2")
 ## ...with SSL enabled...
@@ -145,12 +143,14 @@ sys.exit(0)
 ## ...and Certbot, for Let's Encrypt SSL certificates.
 #runIfPathMissing("/usr/lib/python3/dist-packages/certbot", "apt-get install -y certbot python-certbot-apache")
 
-# /var/www/html is written by the build process run via a WSGI process, running as the www-data user, so the www-data user
-# needs to be able to write in /var/www/html.
-os.system("chown www-data:www-data /var/www/html")
-os.system("chown www-data:www-data /var/www/html/index.html")
+## /var/www/html is written by the build process run via a WSGI process, running as the www-data user, so the www-data user
+## needs to be able to write in /var/www/html.
+#os.system("chown www-data:www-data /var/www/html")
+#os.system("chown www-data:www-data /var/www/html/index.html")
 
 getUserOption("-domainName", "Please enter this site's domain name")
+
+sys.exit(0)
 
 # If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
 # Code goes here - check if there's an archived SSL cedtiftcate to unpack.
