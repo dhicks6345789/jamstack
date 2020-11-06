@@ -150,6 +150,10 @@ runIfPathMissing("/usr/bin/caddy", "echo \"deb [trusted=yes] https://apt.fury.io
 
 getUserOption("-domainName", "Please enter this site's domain name")
 
+# Copy over the Caddy configuration file.
+copyfile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
+replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"]})
+
 sys.exit(0)
 
 # If this project already includes a Let's Encrypt certificate, install that. Otherwise, ask the user if we should set one up.
