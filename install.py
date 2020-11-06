@@ -129,10 +129,7 @@ runIfPathMissing("/usr/bin/rclone", "curl https://rclone.org/install.sh | sudo b
 runIfPathMissing("/usr/bin/fusermount", "apt-get -y install fuse")
 
 # Make sure Caddy (web server) is installed.
-if not os.path.exists("/etc/caddy"):
-    os.system("echo \"deb [trusted=yes] https://apt.fury.io/caddy/ /\" | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list")
-    os.system("apt-get update")
-    os.system("apt-get install caddy")
+runIfPathMissing("/usr/bin/caddy", "echo \"deb [trusted=yes] https://apt.fury.io/caddy/ /\" | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list; apt-get update; apt-get install caddy")
 
 sys.exit(0)
 
