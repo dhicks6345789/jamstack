@@ -12,7 +12,7 @@ cd /var/local/jekyll; bundle exec jekyll build --destination /var/www/html --inc
 jekyllRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime) ))
 echo "STATUS: Jekyll run time: $jekyllRuntime seconds."
 
-echo "STATUS: Tidying HTML...
+echo "STATUS: Tidying HTML..."
 /usr/local/bin/tidyHTML.py /var/www/html 2>&1
 tidyRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime + jekyllRuntime) ))
 totalRuntime=$(( SECONDS - startTime ))
