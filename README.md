@@ -14,7 +14,11 @@ On a Linux server (currently tested on Debian 10 "Buster"), you can clone the pr
 ```
 curl -s https://www.sansay.co.uk/jamstack/install.py -o install.py; sudo python3 install.py; rm install.py
 ```
-This will step through the installation and configuration of your system with the above packages, leaving you with a basic template website to start adding content and functionality to.
+This will step through the installation and configuration of your system with the above packages, asking you for various values as it goes along, leaving you with a basic template website to start adding content and functionality to.
+
+```
+curl -s https://www.sansay.co.uk/jamstack/install.py -o install.py; sudo python3 install.py -domainName YOURSITEDOMAINNAME -contentFolderPath DRIVEPATH -jekyllFolderPath DRIVEPATH -buildPassword PASSWORD; rm install.py
+```
 
 The recommended approach is to duplicate this project so you have your own editable version you can extend to add any further requirements or content to.
 
