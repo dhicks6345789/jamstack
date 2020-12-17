@@ -257,8 +257,6 @@ downloadFile("build.sh", "/etc/webconsole/tasks/build/build.sh", mode="755")
 downloadFile("tidyHTML.py", "/usr/local/bin/tidyHTML.py", mode="0755")
 os.system("chown www-data:www-data /usr/local/bin/tidyHTML.py")
 
-sys.exit(0)
-
 # Install DocsToMarkdown.
 runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubusercontent.com/dhicks6345789/docs-to-markdown/master/docsToMarkdown.py -o /usr/local/bin/docsToMarkdown.py; chmod a+x /usr/local/bin/docsToMarkdown.py; echo > /var/log/build.log; chown www-data:www-data /var/log/build.log")
 runIfPathMissing("/var/local/jekyll", "mkdir /var/local/jekyll; chown www-data:www-data /var/local/jekyll")
