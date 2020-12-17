@@ -1,9 +1,12 @@
 #!/bin/bash
 startTime=$SECONDS
-echo "Starting..." > /var/log/build.log
-python3 /usr/local/bin/docsToMarkdown.py -produceFolderIndexes -c /var/local/docsToMarkdown.json -i /mnt/content -o /var/local/jekyll -t /mnt/jekyll >> /var/log/build.log 2>&1
+echo "Starting..."
+#python3 /usr/local/bin/docsToMarkdown.py -produceFolderIndexes -c /var/local/docsToMarkdown.json -i /mnt/content -o /var/local/jekyll -t /mnt/jekyll 2>&1
 docsToMarkdownRuntime=$(( SECONDS - startTime ))
-echo "DocsToMarkdown run time: $docsToMarkdownRuntime seconds." >> /var/log/build.log
+echo "DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
+
+exit
+
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 cd /var/local/jekyll; bundle exec jekyll build --destination /var/www/html --incremental >> /var/log/build.log 2>&1; cd
