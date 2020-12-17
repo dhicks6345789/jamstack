@@ -8,12 +8,12 @@ echo "STATUS: DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 echo "STATUS: Running Jekyll..."
-cd /var/local/jekyll; bundle exec jekyll build --destination /var/www/html --incremental 2>&1; cd
+cd /var/local/jekyll; bundle exec jekyll build --destination /usr/share/caddy --incremental 2>&1; cd
 jekyllRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime) ))
 echo "STATUS: Jekyll run time: $jekyllRuntime seconds."
 
 echo "STATUS: Tidying HTML..."
-/usr/local/bin/tidyHTML.py /var/www/html 2>&1
+/usr/local/bin/tidyHTML.py /usr/share/caddy 2>&1
 tidyRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime + jekyllRuntime) ))
 totalRuntime=$(( SECONDS - startTime ))
 echo "STATUS: Tidy run time: $tidyRuntime seconds."
