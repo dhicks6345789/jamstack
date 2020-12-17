@@ -1,9 +1,9 @@
 #!/bin/bash
 startTime=$SECONDS
-echo "Starting..."
-#python3 /usr/local/bin/docsToMarkdown.py -produceFolderIndexes -c /var/local/docsToMarkdown.json -i /mnt/content -o /var/local/jekyll -t /mnt/jekyll 2>&1
+echo "STATUS: Starting..."
+python3 /usr/local/bin/docsToMarkdown.py -produceFolderIndexes -c /var/local/docsToMarkdown.json -i /mnt/content -o /var/local/jekyll -t /mnt/jekyll 2>&1
 docsToMarkdownRuntime=$(( SECONDS - startTime ))
-echo "DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
+echo "STATUS: DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
 
 exit
 
