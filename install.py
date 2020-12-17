@@ -8,7 +8,7 @@ import hashlib
 
 # Parse any options set by the user on the command line.
 validBooleanOptions = []
-validValueOptions = ["-domainName", "-contentFolderPath", "-jekyllFolderPath"]
+validValueOptions = ["-domainName", "-contentFolderPath", "-jekyllFolderPath", "-buildPassword"]
 userOptions = {}
 optionCount = 1
 while optionCount < len(sys.argv):
@@ -137,8 +137,11 @@ getUserOption("-domainName", "Please enter this site's domain name")
 copyfile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
 replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"]})
 
-# Make sure Web Console (simple web user interface for command-line applications) is installed.
+# Make sure Web Console (simple web user interface for command-line applications) is installed...
 runIfPathMissing("/usr/local/bin/webconsole", "curl -s https://www.sansay.co.uk/web-console/install.sh | sudo bash")
+# ...and configured.
+getUserOption("-buildPassword", "Please enter this site's build password")
+os.system("webconsole --new --newTaskID build --newTaskTitle \"Build Site\" --newTaskSecret " + userOptions["-buildPassword"] + " --newTaskPublic N --newTaskCommand build.sh")
 
 sys.exit(0)
 
