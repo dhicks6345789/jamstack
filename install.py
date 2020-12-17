@@ -67,9 +67,9 @@ def replaceVariables(theFile, theKeyValues):
     writeFile(theFile, fileData)
     
 def runExpect(inputArray):
-  writeFile("temp.expect", inputArray)
-  os.system("expect temp.expect")
-  os.system("rm temp.expect")
+    writeFile("temp.expect", inputArray)
+    os.system("expect temp.expect")
+    os.system("rm temp.expect")
 
 print("Installing...")
 
@@ -136,10 +136,6 @@ getUserOption("-domainName", "Please enter this site's domain name")
 # Copy over the Caddy configuration file.
 copyfile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
 replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"]})
-
-sys.exit(0)
-
-
 
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
@@ -249,6 +245,8 @@ os.system("systemctl start rclone-content")
 os.system("systemctl start rclone-jekyll")
 os.system("systemctl enable rclone-content")
 os.system("systemctl enable rclone-jekyll")
+
+sys.exit(0)
 
 # Copy accross the build.sh script.
 copyfile("build.sh", "/usr/local/bin/build.sh", mode="755")
