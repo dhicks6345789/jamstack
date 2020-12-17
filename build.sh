@@ -1,19 +1,21 @@
 #!/bin/bash
 startTime=$SECONDS
-echo "STATUS: Starting..."
+echo "STATUS: Running Docs To Markdown..."
 python3 /usr/local/bin/docsToMarkdown.py -produceFolderIndexes -c /var/local/docsToMarkdown.json -i /mnt/content -o /var/local/jekyll -t /mnt/jekyll 2>&1
 docsToMarkdownRuntime=$(( SECONDS - startTime ))
 echo "STATUS: DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
 
-exit
-
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+echo "STATUS: Running Jekyll..."
 cd /var/local/jekyll; bundle exec jekyll build --destination /var/www/html --incremental >> /var/log/build.log 2>&1; cd
 jekyllRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime) ))
-echo "Jekyll run time: $jekyllRuntime seconds." >> /var/log/build.log
+echo "STATUS: Jekyll run time: $jekyllRuntime seconds."
+
+echo "STATUS: Tidying HTML...
 /usr/local/bin/tidyHTML.py /var/www/html >> /var/log/build.log 2>&1
 tidyRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime + jekyllRuntime) ))
 totalRuntime=$(( SECONDS - startTime ))
-echo "Tidy run time: $tidyRuntime seconds." >> /var/log/build.log
-echo "Done! Total run time: $totalRuntime seconds." >> /var/log/build.log
+echo "STATUS: Tidy run time: $tidyRuntime seconds."
+echo "STATUS: Total run time: $totalRuntime seconds."
+echo "STATUS: Done"
