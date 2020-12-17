@@ -137,6 +137,11 @@ getUserOption("-domainName", "Please enter this site's domain name")
 copyfile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
 replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"]})
 
+# Make sure Web Console (simple web user interface for command-line applications) is installed.
+runIfPathMissing("/usr/local/bin/webconsole", "curl -s https://www.sansay.co.uk/web-console/install.sh | sudo bash")
+
+sys.exit(0)
+
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
     print("Configuring rclone...")
@@ -245,8 +250,6 @@ os.system("systemctl start rclone-content")
 os.system("systemctl start rclone-jekyll")
 os.system("systemctl enable rclone-content")
 os.system("systemctl enable rclone-jekyll")
-
-sys.exit(0)
 
 # Copy accross the build.sh script.
 copyfile("build.sh", "/usr/local/bin/build.sh", mode="755")
