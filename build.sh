@@ -7,6 +7,7 @@ echo "STATUS: DocsToMarkdown run time: $docsToMarkdownRuntime seconds."
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+export HOME="/root"
 echo "STATUS: Running Jekyll..."
 cd /var/local/jekyll; bundle exec jekyll build --destination /usr/share/caddy --incremental 2>&1; cd
 jekyllRuntime=$(( SECONDS - (startTime + docsToMarkdownRuntime) ))
