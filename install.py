@@ -6,6 +6,8 @@ import time
 import shutil
 import hashlib
 
+projectRoot = "https://www.sansay.co.uk/jamstack"
+
 # Parse any options set by the user on the command line.
 validBooleanOptions = []
 validValueOptions = ["-domainName", "-contentFolderPath", "-jekyllFolderPath", "-buildPassword"]
@@ -25,11 +27,13 @@ def runIfPathMissing(thePath, theCommand):
         os.system(theCommand)
         
 def copyfile(src, dest, mode=None):
-    srcStat = os.stat(src)
-    if (not os.path.exists(dest)) or (not str(srcStat.st_mtime) == str(os.stat(dest).st_mtime)):
+    #srcStat = os.stat(src)
+    #if (not os.path.exists(dest)) or (not str(srcStat.st_mtime) == str(os.stat(dest).st_mtime)):
+    if (not os.path.exists(dest)):
         print("Copying file " + src + " to " + dest)
-        shutil.copyfile(src, dest)
-        os.utime(dest, (srcStat.st_atime, srcStat.st_mtime))
+        #shutil.copyfile(src, dest)
+        os.system("curl -s " + projectRoot + "/" + src + " -o " + dest)
+        #os.utime(dest, (srcStat.st_atime, srcStat.st_mtime))
         if not mode == None:
             os.system("chmod " + mode + " " + dest)
         return(1)
