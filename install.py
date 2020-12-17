@@ -26,18 +26,11 @@ def runIfPathMissing(thePath, theCommand):
         print("Running: " + theCommand)
         os.system(theCommand)
         
-def copyfile(src, dest, mode=None):
-    #srcStat = os.stat(src)
-    #if (not os.path.exists(dest)) or (not str(srcStat.st_mtime) == str(os.stat(dest).st_mtime)):
-    if (not os.path.exists(dest)):
-        print("Copying file " + src + " to " + dest)
-        #shutil.copyfile(src, dest)
-        os.system("curl -s " + projectRoot + "/" + src + " -o " + dest)
-        #os.utime(dest, (srcStat.st_atime, srcStat.st_mtime))
-        if not mode == None:
-            os.system("chmod " + mode + " " + dest)
-        return(1)
-    return(0)
+def downloadFile(src, dest, mode=None):
+    print("Copying file " + src + " to " + dest)
+    os.system("curl -s " + projectRoot + "/" + src + " -o " + dest)
+    if not mode == None:
+        os.system("chmod " + mode + " " + dest)
 
 def getUserOption(optionName, theMessage):
     if not optionName in userOptions.keys():
@@ -138,7 +131,7 @@ runIfPathMissing("/usr/bin/caddy", "echo \"deb [trusted=yes] https://apt.fury.io
 getUserOption("-domainName", "Please enter this site's domain name")
 
 # Copy over the Caddy configuration file.
-copyfile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
+downloadFile("Caddyfile", "/etc/caddy/Caddyfile", mode="0744")
 replaceVariables("/etc/caddy/Caddyfile", {"DOMAINNAME":userOptions["-domainName"]})
 
 # Make sure Web Console (simple web user interface for command-line applications) is installed...
@@ -243,25 +236,25 @@ if not os.path.exists("/root/.config/rclone/rclone.conf"):
 os.system("systemctl stop rclone-content")
 os.system("systemctl stop rclone-jekyll")
 # ...make sure FUSE is configured to allow non-root users to access mounts...
-copyfile("fuse.conf", "/etc/fuse.conf", mode="644")
+downloadFile("fuse.conf", "/etc/fuse.conf", mode="644")
 # ...make sure the mount point and cache folders exist...
 os.makedirs("/mnt/content", exist_ok=True)
 os.makedirs("/mnt/jekyll", exist_ok=True)
 os.makedirs("/var/cache/rclone-content", exist_ok=True)
 os.makedirs("/var/cache/rclone-jekyll", exist_ok=True)
 # ...then set up systemd to mount the repository.
-copyfile("rclone-content.service", "/etc/systemd/system/rclone-content.service", mode="644")
-copyfile("rclone-jekyll.service", "/etc/systemd/system/rclone-jekyll.service", mode="644")
+downloadFile("rclone-content.service", "/etc/systemd/system/rclone-content.service", mode="644")
+downloadFile("rclone-jekyll.service", "/etc/systemd/system/rclone-jekyll.service", mode="644")
 os.system("systemctl start rclone-content")
 os.system("systemctl start rclone-jekyll")
 os.system("systemctl enable rclone-content")
 os.system("systemctl enable rclone-jekyll")
 
 # Copy accross the build.sh script.
-copyfile("build.sh", "/etc/webconsole/tasks/build/build.sh", mode="755")
+downloadFile("build.sh", "/etc/webconsole/tasks/build/build.sh", mode="755")
 
 # Copy over the Python scipt that cleans up HTML files.
-copyfile("tidyHTML.py", "/usr/local/bin/tidyHTML.py", mode="0755")
+downloadFile("tidyHTML.py", "/usr/local/bin/tidyHTML.py", mode="0755")
 os.system("chown www-data:www-data /usr/local/bin/tidyHTML.py")
 
 sys.exit(0)
@@ -269,5 +262,5 @@ sys.exit(0)
 # Install DocsToMarkdown.
 runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubusercontent.com/dhicks6345789/docs-to-markdown/master/docsToMarkdown.py -o /usr/local/bin/docsToMarkdown.py; chmod a+x /usr/local/bin/docsToMarkdown.py; echo > /var/log/build.log; chown www-data:www-data /var/log/build.log")
 runIfPathMissing("/var/local/jekyll", "mkdir /var/local/jekyll; chown www-data:www-data /var/local/jekyll")
-copyfile("docsToMarkdown.json", "/var/local/docsToMarkdown.json", mode="644")
+downloadFile("docsToMarkdown.json", "/var/local/docsToMarkdown.json", mode="644")
 os.system("chown www-data:www-data /var/local/docsToMarkdown.json")
