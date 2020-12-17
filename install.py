@@ -140,6 +140,7 @@ os.system("curl -s https://www.sansay.co.uk/web-console/install.sh | sudo bash")
 if not os.path.exists("/etc/webconsole/tasks/build"):
     getUserOption("-buildPassword", "Please enter this site's build password")
     os.system("webconsole --new --newTaskID build --newTaskTitle \"Build Site\" --newTaskSecret " + userOptions["-buildPassword"] + " --newTaskPublic N --newTaskCommand build.sh")
+downloadFile("webconsoleConfig.csv", "/etc/webconsole/config.csv", mode="0744")
 
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
