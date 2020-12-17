@@ -75,7 +75,7 @@ def runExpect(inputArray):
     os.system("expect temp.expect")
     os.system("rm temp.expect")
 
-print("Installing...")
+print("Installing JAMStack...")
 
 # Make sure dos2unix (line-end conversion utility) is installed.
 runIfPathMissing("/usr/bin/dos2unix", "apt-get install -y dos2unix")
@@ -108,7 +108,7 @@ os.system("mkdir /.bundle > /dev/null 2>&1")
 os.system("chown www-data:www-data /.bundle > /dev/null 2>&1")
 
 # Make sure Pandoc (conversion utility for converting various file formats, in this case DOCX to Markdown) is installed.
-# Note that we need version 2.7.1, released March 2019, as it contains a bug fix to handle O365-created DOCX files properly - the version included by Debian Stretch is not yet up to date.
+# Note that we need at least version 2.7.1, released March 2019, as it contains a bug fix to handle O365-created DOCX files properly - the version included by Debian Stretch is not yet up to date.
 runIfPathMissing("/usr/bin/pandoc", "wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-1-amd64.deb; dpkg -i pandoc-2.7.1-1-amd64.deb; rm pandoc-2.7.1-1-amd64.deb")
 
 # Make sure Flask (Python web-publishing framework) is installed.
@@ -147,8 +147,6 @@ os.system("curl -s https://www.sansay.co.uk/web-console/install.sh | sudo bash")
 if not os.path.exists("/etc/webconsole/tasks/build"):
     getUserOption("-buildPassword", "Please enter this site's build password")
     os.system("webconsole --new --newTaskID build --newTaskTitle \"Build Site\" --newTaskSecret " + userOptions["-buildPassword"] + " --newTaskPublic N --newTaskCommand build.sh")
-
-sys.exit(0)
 
 # Make sure Rclone is set up to connect to the user's cloud storage - we might need to ask the user for some details.
 if not os.path.exists("/root/.config/rclone/rclone.conf"):
@@ -260,11 +258,13 @@ os.system("systemctl enable rclone-content")
 os.system("systemctl enable rclone-jekyll")
 
 # Copy accross the build.sh script.
-copyfile("build.sh", "/usr/local/bin/build.sh", mode="755")
+copyfile("build.sh", "/etc/webconsole/tasks/build/build.sh", mode="755")
 
 # Copy over the Python scipt that cleans up HTML files.
 copyfile("tidyHTML.py", "/usr/local/bin/tidyHTML.py", mode="0755")
 os.system("chown www-data:www-data /usr/local/bin/tidyHTML.py")
+
+sys.exit(0)
 
 # Install DocsToMarkdown.
 runIfPathMissing("/usr/local/bin/docsToMarkdown.py", "curl https://raw.githubusercontent.com/dhicks6345789/docs-to-markdown/master/docsToMarkdown.py -o /usr/local/bin/docsToMarkdown.py; chmod a+x /usr/local/bin/docsToMarkdown.py; echo > /var/log/build.log; chown www-data:www-data /var/log/build.log")
