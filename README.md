@@ -12,7 +12,7 @@ Template [JAMStack](https://jamstack.org/)-style project built on:
 
 On a Linux server (currently tested on Debian 10 "Buster"), you can clone the project and run the install script as root:
 ```
-curl -s https://www.sansay.co.uk/jamstack/install.py | sudo python3
+curl -s https://www.sansay.co.uk/jamstack/install.py -o install.py; sudo python3 install.py; rm install.py
 ```
 This will step through the installation and configuration of your system with the above packages, leaving you with a basic template website to start adding content and functionality to.
 
